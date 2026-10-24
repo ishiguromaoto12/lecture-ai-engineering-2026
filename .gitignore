@@ -7,8 +7,24 @@ __pycache__/
 .env
 .env.*
 
+# ローカルに置いた演習資料は共有しない
+/演習資料/
+
 # 個人の学習ログ（第3回の宿題で作成）は共有しない
 learning_log/
+
+# 第1回の提出用にまとめた実行ログは共有する
+!lectures/01/learning_log/
+lectures/01/learning_log/**
+!lectures/01/learning_log/basic/
+!lectures/01/learning_log/basic/execution.log
+!lectures/01/learning_log/implementation/
+!lectures/01/learning_log/implementation/execution.log
+!lectures/01/learning_log/implementation/sample-session.json
+!lectures/01/learning_log/advanced/
+!lectures/01/learning_log/advanced/execution.log
+!lectures/01/learning_log/advanced/results.json
+!lectures/01/learning_log/advanced/retry-check.log
 
 # macOS
 .DS_Store

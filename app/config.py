@@ -4,6 +4,12 @@ APIキーやモデル名はコードに書かず、環境変数から読み込�
 """
 
 import os
+from pathlib import Path
+
+from dotenv import load_dotenv
+
+# 自分のPCでは .env を使える。Codespaces secret などの既存の環境変数を優先する。
+load_dotenv(Path(__file__).resolve().parent.parent / ".env", override=False)
 
 # 既定モデル。環境変数 AIE_MODEL を設定すると切り替えられる。
 #   例: export AIE_MODEL=gemini-3.5-flash
@@ -28,9 +34,10 @@ def get_api_key() -> str:
     if not key:
         raise SystemExit(
             "環境変数 GEMINI_API_KEY が見つかりません。\n"
-            "1. GitHub の Settings → Codespaces → Secrets に GEMINI_API_KEY を登録し、\n"
-            "   使う repository に自分の fork を選んでください。\n"
-            "2. Codespaces を起動したあとに登録した場合は、Codespaces を再起動してください。\n"
+            "自分のPC: プロジェクト直下の .env に GEMINI_API_KEY=発行したキー を設定してください。\n"
+            "Codespaces: GitHub の Settings → Codespaces → Secrets に GEMINI_API_KEY を登録し、\n"
+            "使う repository に自分の fork を選んでください。\n"
+            "起動したあとに登録した場合は、Codespaces を再起動してください。\n"
             "   （左下の「Codespaces」→「Stop Current Codespace」→ 再度開く）"
         )
     return key
