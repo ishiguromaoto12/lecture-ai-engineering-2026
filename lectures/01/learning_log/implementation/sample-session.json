@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "model": "gemini-3.5-flash-lite",
+  "history": [
+    {
+      "parts": [
+        {
+          "text": "これから会話の動作確認をします。私のニックネームは「そらまめ」です。短く返事をしてください。"
+        }
+      ],
+      "role": "user"
+    },
+    {
+      "parts": [
+        {
+          "text": "了解しました、そらまめさん。動作確認OKです！",
+          "thought_signature": "EmAKXgFpFH0TFFJnfdh5etsDvRcxI9UTfndTYChYITWCWemw0TAQkZ-c1cRgbrh-dA5zj9K_ogSizcDUFucMfarvVcfB8n28YnRjLeEiJJ3vGru588F3Fpq41Ws_xaAxnoM="
+        }
+      ],
+      "role": "model"
+    },
+    {
+      "parts": [
+        {
+          "text": "私のニックネームは何ですか？一文で答えてください。"
+        }
+      ],
+      "role": "user"
+    },
+    {
+      "parts": [
+        {
+          "text": "あなたのニックネームは「そらまめ」さんです。",
+          "thought_signature": "EmAKXgFpFH0Te1N9cX3BI3JiL4anRLbceAklOE4YpLAdt0WKT7OM3vHwkxE-1lffkXo_fB36QKRwi5YE289DPGows1KX6FB8ySntVc37k7zPL1qwuAy4X3AJHY_mujSPp7w="
+        }
+      ],
+      "role": "model"
+    },
+    {
+      "parts": [
+        {
+          "text": "前の会話で伝えた私のニックネームは何ですか？一文で答えてください。"
+        }
+      ],
+      "role": "user"
+    },
+    {
+      "parts": [
+        {
+          "text": "前の会話で伝えていただいたあなたのニックネームは「そらまめ」です。",
+          "thought_signature": "EmAKXgFpFH0TkwiBoB4gM7s8rIqNnQZFuHy148fp5Ny5gN8Jjse2tgFlh1BbImZRdUrxFyhg9-BSFDAubSfDlVobYwyd4o7tfVyjhHGhWR2R5Cn4pHz9q-cDImDFzhHqHuY="
+        }
+      ],
+      "role": "model"
+    }
+  ]
+}
