@@ -1,0 +1,277 @@
+{
+  "config": {
+    "base_model": "Qwen/Qwen3.5-0.8B",
+    "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+    "num_train_epochs": 20,
+    "seed": 42,
+    "lr": 0.0002,
+    "lora_r": 16,
+    "lora_alpha": 32,
+    "max_seq_len": 512,
+    "max_new_tokens": 256
+  },
+  "versions": {
+    "torch": "2.11.0+cu130",
+    "transformers": "5.18.0",
+    "peft": "0.21.1",
+    "trl": "1.14.2"
+  },
+  "training": {
+    "seconds": 765.6,
+    "epochs": 20.0,
+    "global_step": 340,
+    "last_logged_training_loss": 0.07536849975585938,
+    "loss_history": [
+      {
+        "step": 10,
+        "training_loss": 3.239785385131836
+      },
+      {
+        "step": 20,
+        "training_loss": 2.183859443664551
+      },
+      {
+        "step": 30,
+        "training_loss": 1.5328299522399902
+      },
+      {
+        "step": 40,
+        "training_loss": 1.045774269104004
+      },
+      {
+        "step": 50,
+        "training_loss": 0.6451149940490722
+      },
+      {
+        "step": 60,
+        "training_loss": 0.3120197057723999
+      },
+      {
+        "step": 70,
+        "training_loss": 0.2513567924499512
+      },
+      {
+        "step": 80,
+        "training_loss": 0.1756072759628296
+      },
+      {
+        "step": 90,
+        "training_loss": 0.15114370584487916
+      },
+      {
+        "step": 100,
+        "training_loss": 0.1468256711959839
+      },
+      {
+        "step": 110,
+        "training_loss": 0.12668694257736207
+      },
+      {
+        "step": 120,
+        "training_loss": 0.12454720735549926
+      },
+      {
+        "step": 130,
+        "training_loss": 0.10095243453979492
+      },
+      {
+        "step": 140,
+        "training_loss": 0.10537106990814209
+      },
+      {
+        "step": 150,
+        "training_loss": 0.09951378703117371
+      },
+      {
+        "step": 160,
+        "training_loss": 0.09469059705734253
+      },
+      {
+        "step": 170,
+        "training_loss": 0.09567797183990479
+      },
+      {
+        "step": 180,
+        "training_loss": 0.08312615752220154
+      },
+      {
+        "step": 190,
+        "training_loss": 0.08616534471511841
+      },
+      {
+        "step": 200,
+        "training_loss": 0.08430731892585755
+      },
+      {
+        "step": 210,
+        "training_loss": 0.08607785701751709
+      },
+      {
+        "step": 220,
+        "training_loss": 0.08044247627258301
+      },
+      {
+        "step": 230,
+        "training_loss": 0.08065519332885743
+      },
+      {
+        "step": 240,
+        "training_loss": 0.07956631183624267
+      },
+      {
+        "step": 250,
+        "training_loss": 0.08044718503952027
+      },
+      {
+        "step": 260,
+        "training_loss": 0.07899196147918701
+      },
+      {
+        "step": 270,
+        "training_loss": 0.07898352146148682
+      },
+      {
+        "step": 280,
+        "training_loss": 0.08028624057769776
+      },
+      {
+        "step": 290,
+        "training_loss": 0.07595593929290771
+      },
+      {
+        "step": 300,
+        "training_loss": 0.07368195056915283
+      },
+      {
+        "step": 310,
+        "training_loss": 0.08407471179962159
+      },
+      {
+        "step": 320,
+        "training_loss": 0.07852188944816589
+      },
+      {
+        "step": 330,
+        "training_loss": 0.07541816234588623
+      },
+      {
+        "step": 340,
+        "training_loss": 0.07536849975585938
+      }
+    ],
+    "logging_steps": 10,
+    "max_training_tokens": 118
+  },
+  "original_examples": 116,
+  "abstention_examples": 16,
+  "train_examples": 132,
+  "evaluation_questions": 15,
+  "input_sha256": {
+    "glossary_abstention.py": "2088390df7a325bba956d2111befcaaa25d7e0b425edb37971c7dcd2926bb790",
+    "glossary_sft.jsonl": "af6ac820e0331d8d9af376e3b4cccff1b31f2f0f8bb462839752e3282bbd1081",
+    "config.json": "c1cea204e49473da1ce158fa08f1b0539c2855f9ffdd6cc65df4a881d1f622df",
+    "glossary_experiment.py": "e90b665e8eeb34c58cdd6120a02cccaa329003a42275901f7888334361b24567",
+    "evaluation.json": "2b068446ed4ea335e0e3fa6d98d0eecd23a762b5c0b6e84c6fd2e2cf41298286",
+    "glossary.json": "4b614a08a754bf6cf714f905f185ad5ef22e0957c7e64434a4b418edb68c2319"
+  },
+  "training_terms_for_abstention": [
+    "バッチ正規化",
+    "重み減衰",
+    "早期終了",
+    "勾配クリッピング",
+    "ラベルスムージング",
+    "ビーム探索",
+    "混合精度学習",
+    "対照学習"
+  ],
+  "evaluations": {
+    "with_reference": {
+      "label": "with_reference",
+      "n": 15,
+      "keyword_rate": 0.4666666666666667,
+      "manual_reviewed": 0,
+      "manual_correct_rate": null,
+      "seconds": 77.791,
+      "by_category": {
+        "seen": {
+          "n": 6,
+          "keyword_rate": 0.6666666666666666,
+          "manual_reviewed": 0,
+          "manual_correct_rate": null
+        },
+        "paraphrase": {
+          "n": 6,
+          "keyword_rate": 0.5,
+          "manual_reviewed": 0,
+          "manual_correct_rate": null
+        },
+        "not_in_glossary": {
+          "n": 3,
+          "keyword_rate": 0.0,
+          "manual_reviewed": 0,
+          "manual_correct_rate": null
+        }
+      },
+      "semantic_review": {
+        "n": 15,
+        "reviewed": 0,
+        "verdict_counts": {
+          "abstain": 0,
+          "correct": 0,
+          "incomplete": 0,
+          "incorrect_assertion": 0
+        },
+        "content_correct_rate": null,
+        "abstention_rate": null,
+        "incorrect_assertion_rate": null,
+        "incomplete_rate": null
+      }
+    },
+    "without_reference": {
+      "label": "without_reference",
+      "n": 15,
+      "keyword_rate": 0.7333333333333333,
+      "manual_reviewed": 0,
+      "manual_correct_rate": null,
+      "seconds": 51.199,
+      "by_category": {
+        "seen": {
+          "n": 6,
+          "keyword_rate": 1.0,
+          "manual_reviewed": 0,
+          "manual_correct_rate": null
+        },
+        "paraphrase": {
+          "n": 6,
+          "keyword_rate": 0.8333333333333334,
+          "manual_reviewed": 0,
+          "manual_correct_rate": null
+        },
+        "not_in_glossary": {
+          "n": 3,
+          "keyword_rate": 0.0,
+          "manual_reviewed": 0,
+          "manual_correct_rate": null
+        }
+      },
+      "semantic_review": {
+        "n": 15,
+        "reviewed": 0,
+        "verdict_counts": {
+          "abstain": 0,
+          "correct": 0,
+          "incomplete": 0,
+          "incorrect_assertion": 0
+        },
+        "content_correct_rate": null,
+        "abstention_rate": null,
+        "incorrect_assertion_rate": null,
+        "incomplete_rate": null
+      }
+    }
+  },
+  "baseline": "epochs20_with_reference の定義例だけで学習した結果を同じ質問・入力で比較",
+  "review_note": "キーワードや保留語句の検出は補助。誤断定率は原文の意味を理由付きで確認して算出する。",
+  "executed_training_myself": false,
+  "executed_by": "Codex が利用者の接続中 Colab T4 で実行"
+}

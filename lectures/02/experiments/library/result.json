@@ -1,0 +1,101 @@
+{
+  "config": {
+    "base_model": "Qwen/Qwen3.5-0.8B",
+    "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+    "seed": 42,
+    "num_train_epochs": 20,
+    "warmup_steps": 6,
+    "lr": 0.0002,
+    "lora_r": 16,
+    "lora_alpha": 32,
+    "max_seq_len": 512,
+    "max_new_tokens": 96,
+    "gen": {
+      "do_sample": false
+    }
+  },
+  "versions": {
+    "transformers": "5.18.0",
+    "peft": "0.21.1",
+    "trl": "1.14.2",
+    "torch": "2.11.0+cu130"
+  },
+  "method": "LoRA（量子化なし）",
+  "dataset_topic": "架空の図書館 FAQ",
+  "training": {
+    "seconds": 177.8,
+    "global_step": 40,
+    "last_logged_training_loss": 0.017411841452121733,
+    "loss_history": [
+      {
+        "step": 10,
+        "training_loss": 1.469672679901123
+      },
+      {
+        "step": 20,
+        "training_loss": 0.06946637630462646
+      },
+      {
+        "step": 30,
+        "training_loss": 0.022081939876079558
+      },
+      {
+        "step": 40,
+        "training_loss": 0.017411841452121733
+      }
+    ],
+    "loss_definition": "Training Loss の最後のログ区間の平均（logging_steps=10）"
+  },
+  "before": {
+    "label": "before",
+    "n": 21,
+    "format_rate": 0.2857142857142857,
+    "content_rate": 0.14285714285714285,
+    "both_rate": 0.14285714285714285,
+    "seconds": 15.7
+  },
+  "after": {
+    "label": "after",
+    "n": 21,
+    "format_rate": 1.0,
+    "content_rate": 1.0,
+    "both_rate": 1.0,
+    "seconds": 32.5
+  },
+  "regressed": [],
+  "knowledge": [
+    {
+      "質問": "分館の開館時間は何時から何時までですか",
+      "FAQ にある": false,
+      "学習前の分類": "format_error",
+      "学習前の出力": "{\"answer\": \"10:00〜18:00\"}",
+      "学習後の分類": "needs_review",
+      "学習後の出力": "{\"answer\": \"この FAQ には記載がありません。運営に確認が必要です。\", \"needs_review\": true}"
+    },
+    {
+      "質問": "館長の名前は何ですか",
+      "FAQ にある": false,
+      "学習前の分類": "format_error",
+      "学習前の出力": "{\"answer\": \"確認が必要\"}",
+      "学習後の分類": "needs_review",
+      "学習後の出力": "{\"answer\": \"この FAQ には記載がありません。運営に確認が必要です。\", \"needs_review\": true}"
+    },
+    {
+      "質問": "次回の読み聞かせイベントはいつですか",
+      "FAQ にある": false,
+      "学習前の分類": "format_error",
+      "学習前の出力": "{\"answer\": \"確認が必要\"}",
+      "学習後の分類": "needs_review",
+      "学習後の出力": "{\"answer\": \"この FAQ には記載がありません。運営に確認が必要です。\", \"needs_review\": true}"
+    },
+    {
+      "質問": "図書館の開館時間を教えてください",
+      "FAQ にある": true,
+      "学習前の分類": "format_error",
+      "学習前の出力": "{\"answer\": \"10:00〜18:00\"}",
+      "学習後の分類": "asserted",
+      "学習後の出力": "{\"answer\": \"開館時間は 10:00〜18:00 です。\", \"needs_review\": false}"
+    }
+  ],
+  "executed_training_myself": true
+}

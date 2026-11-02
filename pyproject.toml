@@ -15,6 +15,6 @@ dependencies = [
 dev = ["pytest>=8"]
 
 [tool.pytest.ini_options]
-pythonpath = ["."]
-testpaths = ["tests"]
+pythonpath = [".", "lectures/02/experiments/helpers"]
+testpaths = ["tests", "lectures/02/experiments/tests"]
 filterwarnings = ["ignore::DeprecationWarning:pydantic_graph"]

@@ -1,0 +1,27 @@
+{
+  "result_file": "result.json",
+  "num_train_epochs": 20,
+  "training_seconds": 222,
+  "global_step": 40,
+  "last_logged_training_loss": 0.013934,
+  "loss_history": [
+    {
+      "step": 10,
+      "training_loss": 1.556209
+    },
+    {
+      "step": 20,
+      "training_loss": 0.084762
+    },
+    {
+      "step": 30,
+      "training_loss": 0.01832
+    },
+    {
+      "step": 40,
+      "training_loss": 0.013934
+    }
+  ],
+  "source": "notebooks/lora_format_tuning.ipynb のセクション4の保存済み出力",
+  "loss_definition": "Training Loss 表の最終行（logging_steps=10 の区間平均）"
+}
