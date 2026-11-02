@@ -1,0 +1,336 @@
+{
+  "summary": {
+    "label": "with_reference",
+    "n": 15,
+    "keyword_rate": 0.4666666666666667,
+    "manual_reviewed": 15,
+    "manual_correct_rate": 0.4666666666666667,
+    "seconds": 77.791,
+    "by_category": {
+      "seen": {
+        "n": 6,
+        "keyword_rate": 0.6666666666666666,
+        "manual_reviewed": 6,
+        "manual_correct_rate": 0.6666666666666666
+      },
+      "paraphrase": {
+        "n": 6,
+        "keyword_rate": 0.5,
+        "manual_reviewed": 6,
+        "manual_correct_rate": 0.5
+      },
+      "not_in_glossary": {
+        "n": 3,
+        "keyword_rate": 0.0,
+        "manual_reviewed": 3,
+        "manual_correct_rate": 0.0
+      }
+    },
+    "semantic_review": {
+      "n": 15,
+      "reviewed": 15,
+      "verdict_counts": {
+        "abstain": 1,
+        "correct": 7,
+        "incomplete": 1,
+        "incorrect_assertion": 6
+      },
+      "content_correct_rate": 0.4666666666666667,
+      "abstention_rate": 0.06666666666666667,
+      "incorrect_assertion_rate": 0.4,
+      "incomplete_rate": 0.06666666666666667
+    }
+  },
+  "rows": [
+    {
+      "id": "lora_seen",
+      "category": "seen",
+      "question": "「LoRA」とは何ですか？",
+      "raw": "事前学習済みの重みは固定したまま、その重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習する手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。",
+      "reference_answer": "事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。",
+      "keyword_ok": true,
+      "missing_keyword_groups": [],
+      "manual_correct": true,
+      "abstention_phrase_detected": false,
+      "response_verdict": "correct",
+      "review_reason": "基盤モデルの重み固定と、更新分を低ランク行列で学習する仕組みを正しく説明している。"
+    },
+    {
+      "id": "lora_paraphrase",
+      "category": "paraphrase",
+      "question": "LoRAでは元の重みをどう扱い、何を学習しますか？",
+      "raw": "固定したままの重みを、2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習する。表した小さな行列を保存し、必要なときにモデルに戻す。使うGPUメモリと保存容量を大きく減らせる。保存するのはアダプタ（モデルに戻す前の状態）と、その中で学習した小さな行列。モデルが選んだURLに実際にアクセスするので、どこへ何を送るかは利用者が把握しておく。",
+      "reference_answer": "事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。",
+      "keyword_ok": true,
+      "missing_keyword_groups": [],
+      "manual_correct": false,
+      "abstention_phrase_detected": false,
+      "response_verdict": "incorrect_assertion",
+      "review_reason": "元の重みそのものを2つの行列で表すと述べ、更新分との区別を誤っている。質問と無関係なURLアクセスの説明も混在している。"
+    },
+    {
+      "id": "qlora_seen",
+      "category": "seen",
+      "question": "「QLoRA」とは何ですか？",
+      "raw": "モデルの重みを4ビットなどに量子化して、より小さなGPUで扱える手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。",
+      "reference_answer": "ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。",
+      "keyword_ok": true,
+      "missing_keyword_groups": [],
+      "manual_correct": true,
+      "abstention_phrase_detected": false,
+      "response_verdict": "correct",
+      "review_reason": "4bit量子化による省メモリとLoRA学習に触れており、重要な矛盾はない。説明の接続は簡略だが概念の要点を満たす。"
+    },
+    {
+      "id": "qlora_paraphrase",
+      "category": "paraphrase",
+      "question": "QLoRAはどのようにメモリを節約して追加学習しますか？",
+      "raw": "モデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。",
+      "reference_answer": "ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。",
+      "keyword_ok": true,
+      "missing_keyword_groups": [],
+      "manual_correct": true,
+      "abstention_phrase_detected": false,
+      "response_verdict": "correct",
+      "review_reason": "重みの4bit量子化でメモリを節約し、LoRAで学習すると説明している。"
+    },
+    {
+      "id": "overfitting_seen",
+      "category": "seen",
+      "question": "「過学習」とは何ですか？",
+      "raw": "学習データにだけ過度に適合し、未知の入力に対する性能が落ちる状態。モデルが知らないこと（最新情報、組織や講座に固有の情報など）を聞いたときに起きやすい。外部データをツールで参照させる、根拠を示させる、評価で検出する、などで抑える。",
+      "reference_answer": "学習データにだけ過度に適合し、未知の入力に対する性能が落ちる状態。学習に使わない検証データで性能を測って気づく。",
+      "keyword_ok": true,
+      "missing_keyword_groups": [],
+      "manual_correct": false,
+      "abstention_phrase_detected": false,
+      "response_verdict": "incorrect_assertion",
+      "review_reason": "冒頭の定義は正しいが、ハルシネーションの発生条件と対策を過学習に結び付けている。"
+    },
+    {
+      "id": "overfitting_paraphrase",
+      "category": "paraphrase",
+      "question": "過学習が起きると、学習に使った問題と未知の問題への対応はどうなりますか？",
+      "raw": "モデルが知らない入力に、学習していないことと similarに違えるほど性能が落ちる。検出するほどモデルが知らないほど性能が落ちる。過学習した状態で未知の入力に渡すとき、モデルが知らないまま回答を返す。返答を返す前にツールを呼ぶか、データを参照させる、評価で検出する、などで抑える。",
+      "reference_answer": "学習データにだけ過度に適合し、未知の入力に対する性能が落ちる状態。学習に使わない検証データで性能を測って気づく。",
+      "keyword_ok": false,
+      "missing_keyword_groups": [
+        [
+          "学習データ",
+          "訓練データ",
+          "学習に使った"
+        ]
+      ],
+      "manual_correct": false,
+      "abstention_phrase_detected": false,
+      "response_verdict": "incorrect_assertion",
+      "review_reason": "学習データへの過度の適合を説明せず、単に知らない状態との混同や、ツール参照で抑えるという誤った説明がある。"
+    },
+    {
+      "id": "lec-start-tag_seen",
+      "category": "seen",
+      "question": "「lecNN-start タグ」とは何ですか？",
+      "raw": "各回の演習を始める時点のコードに付けているGitタグ。前の回が終わっていなくても、このタグからブランチを作ればその回の演習を始められる。提出は自分のforkの main へのPRとして行う。",
+      "reference_answer": "AIE2026の講座repoで、各回の演習開始時点のコードに付けているGitタグ（例：lec03-start）。前の回が終わっていなくても、このタグからブランチを作ればその回の演習を始められる。",
+      "keyword_ok": true,
+      "missing_keyword_groups": [],
+      "manual_correct": true,
+      "abstention_phrase_detected": false,
+      "response_verdict": "correct",
+      "review_reason": "演習開始時点のコードを示すGitタグと、そのタグからブランチを作る使い方を説明している。"
+    },
+    {
+      "id": "lec-start-tag_paraphrase",
+      "category": "paraphrase",
+      "question": "lecNN-start タグを使うと、前の回を終えていなくても何ができますか？",
+      "raw": "このタグは講座repoのmain branchに載る必要がある。main を壊さずに試すために使う。本講座のfork内で作業ブランチからこのタグに達したら、自分のforkの main へPRを出して提出する。",
+      "reference_answer": "AIE2026の講座repoで、各回の演習開始時点のコードに付けているGitタグ（例：lec03-start）。前の回が終わっていなくても、このタグからブランチを作ればその回の演習を始められる。",
+      "keyword_ok": false,
+      "missing_keyword_groups": [
+        [
+          "開始",
+          "始め",
+          "スタート"
+        ],
+        [
+          "演習",
+          "コード"
+        ]
+      ],
+      "manual_correct": false,
+      "abstention_phrase_detected": false,
+      "response_verdict": "incorrect_assertion",
+      "review_reason": "タグがmain branchに載る必要があると断定し、作業ブランチがタグに達したらPRを出すという誤った手順を説明している。"
+    },
+    {
+      "id": "homework-levels_seen",
+      "category": "seen",
+      "question": "「宿題の3レベル」とは何ですか？",
+      "raw": "AIE2026の演習・宿題の構成と提出方法。どれか1つに取り組めばその回の宿題は完了。採点はしない。",
+      "reference_answer": "AIE2026の宿題の構成。「基礎（講義内容の確認）」「実装（自分でコードを書く）」「発展（調査や試行）」の3段階があり、どれか1つに取り組めばその回の宿題は完了。原則として採点はしない。",
+      "keyword_ok": false,
+      "missing_keyword_groups": [
+        [
+          "基礎"
+        ],
+        [
+          "実装"
+        ],
+        [
+          "発展"
+        ]
+      ],
+      "manual_correct": false,
+      "abstention_phrase_detected": false,
+      "response_verdict": "incomplete",
+      "review_reason": "どれか1つで完了というルールは合っているが、質問の中心である3レベルの名称を説明していない。"
+    },
+    {
+      "id": "homework-levels_paraphrase",
+      "category": "paraphrase",
+      "question": "宿題の3レベルには何があり、全部取り組む必要がありますか？",
+      "raw": "AIE2026の宿題の構成は3段階：基礎（講義内容の確認）、実装（自分でコードを書く）、発展（調査や試行）。どれか1つに取り組めばその回の宿題は完了。原則として採点はしない。",
+      "reference_answer": "AIE2026の宿題の構成。「基礎（講義内容の確認）」「実装（自分でコードを書く）」「発展（調査や試行）」の3段階があり、どれか1つに取り組めばその回の宿題は完了。原則として採点はしない。",
+      "keyword_ok": true,
+      "missing_keyword_groups": [],
+      "manual_correct": true,
+      "abstention_phrase_detected": false,
+      "response_verdict": "correct",
+      "review_reason": "基礎・実装・発展の名称と、どれか1つで完了することを正しく説明している。"
+    },
+    {
+      "id": "answer-md_seen",
+      "category": "seen",
+      "question": "「answer.md」とは何ですか？",
+      "raw": "取り組んだレベル・やったこと・結果・気づきを記入して、自分のforkの main へPRを出して提出する。",
+      "reference_answer": "AIE2026で各回の演習・宿題の結果を書くファイル。lectures/NN/answer.md にあり、取り組んだレベル・やったこと・結果・気づきを記入して、作業ブランチから自分のforkの main へPRを出して提出する。",
+      "keyword_ok": false,
+      "missing_keyword_groups": [
+        [
+          "演習",
+          "宿題"
+        ]
+      ],
+      "manual_correct": true,
+      "abstention_phrase_detected": false,
+      "response_verdict": "correct",
+      "review_reason": "記入する項目と、自分のforkのmainへPRを出す提出方法を説明しており、ファイルの用途を伝えている。"
+    },
+    {
+      "id": "answer-md_paraphrase",
+      "category": "paraphrase",
+      "question": "answer.mdには何を書き、どうやって提出しますか？",
+      "raw": "取り組んだレベル・やったこと・結果・気づきを記入して、自分のforkの main へPRを出して提出する。",
+      "reference_answer": "AIE2026で各回の演習・宿題の結果を書くファイル。lectures/NN/answer.md にあり、取り組んだレベル・やったこと・結果・気づきを記入して、作業ブランチから自分のforkの main へPRを出して提出する。",
+      "keyword_ok": false,
+      "missing_keyword_groups": [
+        [
+          "演習",
+          "宿題"
+        ]
+      ],
+      "manual_correct": true,
+      "abstention_phrase_detected": false,
+      "response_verdict": "correct",
+      "review_reason": "書く内容と提出方法の両方に答えている。キーワードの演習・宿題がなくても意味は合っている。"
+    },
+    {
+      "id": "dropout_outside",
+      "category": "not_in_glossary",
+      "question": "「ドロップアウト」とは何ですか？",
+      "raw": "モデルが答えないように、質問を返すまで待つこと。回数を増やしすぎると料金とレート制限を超過させる。",
+      "reference_answer": "学習中にニューロンなどをランダムに無効化し、過学習を抑える正則化手法。",
+      "keyword_ok": false,
+      "missing_keyword_groups": [
+        [
+          "ランダム",
+          "確率的"
+        ],
+        [
+          "無効",
+          "除外",
+          "落と",
+          "ゼロ",
+          "使わない"
+        ],
+        [
+          "過学習",
+          "正則化"
+        ]
+      ],
+      "manual_correct": false,
+      "abstention_phrase_detected": false,
+      "response_verdict": "incorrect_assertion",
+      "review_reason": "モデルが質問を返すまで待つことと説明しており、学習中のランダムな無効化を説明していない。"
+    },
+    {
+      "id": "gradient-descent_outside",
+      "category": "not_in_glossary",
+      "question": "「勾配降下法」とは何ですか？",
+      "raw": "この用語は学習用の用語集に記載がないため、正確な説明には確認が必要です。",
+      "reference_answer": "損失関数の勾配を使い、損失が小さくなる方向へ重みなどのパラメータを繰り返し更新する最適化手法。",
+      "keyword_ok": false,
+      "missing_keyword_groups": [
+        [
+          "勾配",
+          "微分"
+        ],
+        [
+          "損失",
+          "誤差",
+          "目的関数"
+        ],
+        [
+          "更新",
+          "調整"
+        ],
+        [
+          "減ら",
+          "小さ",
+          "最小",
+          "下が",
+          "減少"
+        ]
+      ],
+      "manual_correct": false,
+      "abstention_phrase_detected": true,
+      "response_verdict": "abstain",
+      "review_reason": "定義を創作せず、資料に記載がないため確認が必要と述べている。"
+    },
+    {
+      "id": "distillation_outside",
+      "category": "not_in_glossary",
+      "question": "「知識蒸留」とは何ですか？",
+      "raw": "LLMが知っていること（基礎知識、講座内容、組織や講座に固有の情報）を、自分のforkのrepoでモデルに渡す、とやってる。モデルが知らないこと（最新情報、外部データやツールが持っている情報）を、そのモデルが知っているほど絞る。",
+      "reference_answer": "教師モデルの出力などを使って生徒モデルを学習させ、知識を移す手法。モデルを小さくする用途などに使う。",
+      "keyword_ok": false,
+      "missing_keyword_groups": [
+        [
+          "教師",
+          "teacher"
+        ],
+        [
+          "生徒",
+          "student",
+          "小さいモデル",
+          "小さなモデル"
+        ],
+        [
+          "学習",
+          "訓練"
+        ],
+        [
+          "出力",
+          "予測",
+          "分布",
+          "ソフトラベル"
+        ]
+      ],
+      "manual_correct": false,
+      "abstention_phrase_detected": false,
+      "response_verdict": "incorrect_assertion",
+      "review_reason": "講座repoで情報を渡すという説明を創作し、教師から生徒への知識移転を説明していない。"
+    }
+  ],
+  "reviewer": "Codex（回答原文と参照回答を照合）"
+}

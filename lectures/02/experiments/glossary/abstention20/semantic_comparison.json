@@ -1,0 +1,194 @@
+[
+  {
+    "training": "定義例のみ",
+    "reference": "with_reference",
+    "all": {
+      "n": 15,
+      "reviewed": 15,
+      "verdict_counts": {
+        "abstain": 0,
+        "correct": 5,
+        "incomplete": 2,
+        "incorrect_assertion": 8
+      },
+      "content_correct_rate": 0.3333333333333333,
+      "abstention_rate": 0.0,
+      "incorrect_assertion_rate": 0.5333333333333333,
+      "incomplete_rate": 0.13333333333333333
+    },
+    "by_scope": {
+      "listed": {
+        "n": 12,
+        "reviewed": 12,
+        "verdict_counts": {
+          "abstain": 0,
+          "correct": 5,
+          "incomplete": 2,
+          "incorrect_assertion": 5
+        },
+        "content_correct_rate": 0.4166666666666667,
+        "abstention_rate": 0.0,
+        "incorrect_assertion_rate": 0.4166666666666667,
+        "incomplete_rate": 0.16666666666666666
+      },
+      "unlisted": {
+        "n": 3,
+        "reviewed": 3,
+        "verdict_counts": {
+          "abstain": 0,
+          "correct": 0,
+          "incomplete": 0,
+          "incorrect_assertion": 3
+        },
+        "content_correct_rate": 0.0,
+        "abstention_rate": 0.0,
+        "incorrect_assertion_rate": 1.0,
+        "incomplete_rate": 0.0
+      }
+    }
+  },
+  {
+    "training": "定義例のみ",
+    "reference": "without_reference",
+    "all": {
+      "n": 15,
+      "reviewed": 15,
+      "verdict_counts": {
+        "abstain": 0,
+        "correct": 10,
+        "incomplete": 0,
+        "incorrect_assertion": 5
+      },
+      "content_correct_rate": 0.6666666666666666,
+      "abstention_rate": 0.0,
+      "incorrect_assertion_rate": 0.3333333333333333,
+      "incomplete_rate": 0.0
+    },
+    "by_scope": {
+      "listed": {
+        "n": 12,
+        "reviewed": 12,
+        "verdict_counts": {
+          "abstain": 0,
+          "correct": 10,
+          "incomplete": 0,
+          "incorrect_assertion": 2
+        },
+        "content_correct_rate": 0.8333333333333334,
+        "abstention_rate": 0.0,
+        "incorrect_assertion_rate": 0.16666666666666666,
+        "incomplete_rate": 0.0
+      },
+      "unlisted": {
+        "n": 3,
+        "reviewed": 3,
+        "verdict_counts": {
+          "abstain": 0,
+          "correct": 0,
+          "incomplete": 0,
+          "incorrect_assertion": 3
+        },
+        "content_correct_rate": 0.0,
+        "abstention_rate": 0.0,
+        "incorrect_assertion_rate": 1.0,
+        "incomplete_rate": 0.0
+      }
+    }
+  },
+  {
+    "training": "保留例を追加",
+    "reference": "with_reference",
+    "all": {
+      "n": 15,
+      "reviewed": 15,
+      "verdict_counts": {
+        "abstain": 1,
+        "correct": 7,
+        "incomplete": 1,
+        "incorrect_assertion": 6
+      },
+      "content_correct_rate": 0.4666666666666667,
+      "abstention_rate": 0.06666666666666667,
+      "incorrect_assertion_rate": 0.4,
+      "incomplete_rate": 0.06666666666666667
+    },
+    "by_scope": {
+      "listed": {
+        "n": 12,
+        "reviewed": 12,
+        "verdict_counts": {
+          "abstain": 0,
+          "correct": 7,
+          "incomplete": 1,
+          "incorrect_assertion": 4
+        },
+        "content_correct_rate": 0.5833333333333334,
+        "abstention_rate": 0.0,
+        "incorrect_assertion_rate": 0.3333333333333333,
+        "incomplete_rate": 0.08333333333333333
+      },
+      "unlisted": {
+        "n": 3,
+        "reviewed": 3,
+        "verdict_counts": {
+          "abstain": 1,
+          "correct": 0,
+          "incomplete": 0,
+          "incorrect_assertion": 2
+        },
+        "content_correct_rate": 0.0,
+        "abstention_rate": 0.3333333333333333,
+        "incorrect_assertion_rate": 0.6666666666666666,
+        "incomplete_rate": 0.0
+      }
+    }
+  },
+  {
+    "training": "保留例を追加",
+    "reference": "without_reference",
+    "all": {
+      "n": 15,
+      "reviewed": 15,
+      "verdict_counts": {
+        "abstain": 2,
+        "correct": 9,
+        "incomplete": 0,
+        "incorrect_assertion": 4
+      },
+      "content_correct_rate": 0.6,
+      "abstention_rate": 0.13333333333333333,
+      "incorrect_assertion_rate": 0.26666666666666666,
+      "incomplete_rate": 0.0
+    },
+    "by_scope": {
+      "listed": {
+        "n": 12,
+        "reviewed": 12,
+        "verdict_counts": {
+          "abstain": 0,
+          "correct": 9,
+          "incomplete": 0,
+          "incorrect_assertion": 3
+        },
+        "content_correct_rate": 0.75,
+        "abstention_rate": 0.0,
+        "incorrect_assertion_rate": 0.25,
+        "incomplete_rate": 0.0
+      },
+      "unlisted": {
+        "n": 3,
+        "reviewed": 3,
+        "verdict_counts": {
+          "abstain": 2,
+          "correct": 0,
+          "incomplete": 0,
+          "incorrect_assertion": 1
+        },
+        "content_correct_rate": 0.0,
+        "abstention_rate": 0.6666666666666666,
+        "incorrect_assertion_rate": 0.3333333333333333,
+        "incomplete_rate": 0.0
+      }
+    }
+  }
+]

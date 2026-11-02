@@ -1,0 +1,182 @@
+{
+  "config": {
+    "base_model": "Qwen/Qwen3.5-0.8B",
+    "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+    "seed": 42,
+    "num_train_epochs": 5,
+    "warmup_steps": 6,
+    "lr": 0.0002,
+    "lora_r": 16,
+    "lora_alpha": 32,
+    "max_seq_len": 512,
+    "max_new_tokens": 256,
+    "gen": {
+      "do_sample": false
+    }
+  },
+  "versions": {
+    "transformers": "5.18.0",
+    "peft": "0.21.1",
+    "trl": "1.14.2",
+    "torch": "2.11.0+cu130"
+  },
+  "method": "LoRA（量子化なし）",
+  "dataset_topic": "講座の用語集",
+  "answer_style": "自然文",
+  "model_receives_reference_at_inference": false,
+  "dataset": {
+    "terms": 58,
+    "train_examples": 116,
+    "evaluation_questions": 15,
+    "input_sha256": {
+      "glossary.json": "4b614a08a754bf6cf714f905f185ad5ef22e0957c7e64434a4b418edb68c2319",
+      "glossary_sft.jsonl": "af6ac820e0331d8d9af376e3b4cccff1b31f2f0f8bb462839752e3282bbd1081",
+      "evaluation.json": "2b068446ed4ea335e0e3fa6d98d0eecd23a762b5c0b6e84c6fd2e2cf41298286",
+      "glossary_experiment.py": "69b74b4697e17cc52052c3153cc05834af4daf00a3c29282e3d59c7b5a5f6e92",
+      "search_tools.py": "76fe15419707e59d437d9f834b013a6b9c4c56ae7ad964a25dd94154abf9323e"
+    }
+  },
+  "evaluation_notes": {
+    "keyword_rate": "語句による一次確認。意味の内容正解率ではない。",
+    "manual_correct_rate": "全問を手動確認するまで null。",
+    "seen": "学習と同じ質問。未知の質問への汎化とは区別する。",
+    "not_in_glossary": "未掲載でも正しく説明できれば正解。検索の未検出とは別に評価する。",
+    "search_query": "問題文に書かれた用語。正解 ID や参照回答は検索に渡さない。"
+  },
+  "training": {
+    "seconds": 179.0,
+    "global_step": 75,
+    "epochs": 5.0,
+    "last_logged_training_loss": 0.4114089488983154,
+    "loss_history": [
+      {
+        "step": 5,
+        "training_loss": 3.705674743652344
+      },
+      {
+        "step": 10,
+        "training_loss": 2.849200630187988
+      },
+      {
+        "step": 15,
+        "training_loss": 2.5011850357055665
+      },
+      {
+        "step": 20,
+        "training_loss": 1.9262140274047852
+      },
+      {
+        "step": 25,
+        "training_loss": 1.753986930847168
+      },
+      {
+        "step": 30,
+        "training_loss": 1.6287355422973633
+      },
+      {
+        "step": 35,
+        "training_loss": 1.0792956352233887
+      },
+      {
+        "step": 40,
+        "training_loss": 1.0138863563537597
+      },
+      {
+        "step": 45,
+        "training_loss": 0.8082793235778809
+      },
+      {
+        "step": 50,
+        "training_loss": 0.5448534965515137
+      },
+      {
+        "step": 55,
+        "training_loss": 0.5110586166381836
+      },
+      {
+        "step": 60,
+        "training_loss": 0.5188197135925293
+      },
+      {
+        "step": 65,
+        "training_loss": 0.3535442352294922
+      },
+      {
+        "step": 70,
+        "training_loss": 0.3500091314315796
+      },
+      {
+        "step": 75,
+        "training_loss": 0.4114089488983154
+      }
+    ],
+    "logging_steps": 5
+  },
+  "before": {
+    "label": "before",
+    "n": 15,
+    "keyword_rate": 0.0,
+    "manual_reviewed": 0,
+    "manual_correct_rate": null,
+    "seconds": 178.164,
+    "by_category": {
+      "seen": {
+        "n": 6,
+        "keyword_rate": 0.0,
+        "manual_reviewed": 0,
+        "manual_correct_rate": null
+      },
+      "paraphrase": {
+        "n": 6,
+        "keyword_rate": 0.0,
+        "manual_reviewed": 0,
+        "manual_correct_rate": null
+      },
+      "not_in_glossary": {
+        "n": 3,
+        "keyword_rate": 0.0,
+        "manual_reviewed": 0,
+        "manual_correct_rate": null
+      }
+    }
+  },
+  "after": {
+    "label": "after",
+    "n": 15,
+    "keyword_rate": 0.13333333333333333,
+    "manual_reviewed": 0,
+    "manual_correct_rate": null,
+    "seconds": 59.851,
+    "by_category": {
+      "seen": {
+        "n": 6,
+        "keyword_rate": 0.3333333333333333,
+        "manual_reviewed": 0,
+        "manual_correct_rate": null
+      },
+      "paraphrase": {
+        "n": 6,
+        "keyword_rate": 0.0,
+        "manual_reviewed": 0,
+        "manual_correct_rate": null
+      },
+      "not_in_glossary": {
+        "n": 3,
+        "keyword_rate": 0.0,
+        "manual_reviewed": 0,
+        "manual_correct_rate": null
+      }
+    }
+  },
+  "search": {
+    "label": "search",
+    "n": 15,
+    "seconds": 0.006,
+    "listed_n": 12,
+    "listed_top1_hit_rate": 1.0,
+    "unlisted_n": 3,
+    "unlisted_not_found_rate": 1.0
+  },
+  "keyword_regressed": [],
+  "executed_training_myself": true
+}

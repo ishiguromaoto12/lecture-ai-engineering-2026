@@ -1,0 +1,391 @@
+[
+  {
+    "id": "lora_seen",
+    "category": "seen",
+    "domain": "general",
+    "question": "「LoRA」とは何ですか？",
+    "query": "LoRA",
+    "expected_term_id": "lora",
+    "reference_answer": "事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。",
+    "keyword_groups": [
+      [
+        "固定",
+        "更新しない",
+        "凍結"
+      ],
+      [
+        "低ランク",
+        "小さな行列",
+        "低いランク"
+      ]
+    ],
+    "reference_source": "data/glossary.json"
+  },
+  {
+    "id": "lora_paraphrase",
+    "category": "paraphrase",
+    "domain": "general",
+    "question": "LoRAでは元の重みをどう扱い、何を学習しますか？",
+    "query": "LoRA",
+    "expected_term_id": "lora",
+    "reference_answer": "事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。",
+    "keyword_groups": [
+      [
+        "固定",
+        "更新しない",
+        "凍結"
+      ],
+      [
+        "低ランク",
+        "小さな行列",
+        "低いランク"
+      ]
+    ],
+    "reference_source": "data/glossary.json"
+  },
+  {
+    "id": "qlora_seen",
+    "category": "seen",
+    "domain": "general",
+    "question": "「QLoRA」とは何ですか？",
+    "query": "QLoRA",
+    "expected_term_id": "qlora",
+    "reference_answer": "ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。",
+    "keyword_groups": [
+      [
+        "量子化"
+      ],
+      [
+        "4ビット",
+        "4bit",
+        "4-bit"
+      ],
+      [
+        "LoRA"
+      ]
+    ],
+    "reference_source": "data/glossary.json"
+  },
+  {
+    "id": "qlora_paraphrase",
+    "category": "paraphrase",
+    "domain": "general",
+    "question": "QLoRAはどのようにメモリを節約して追加学習しますか？",
+    "query": "QLoRA",
+    "expected_term_id": "qlora",
+    "reference_answer": "ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。",
+    "keyword_groups": [
+      [
+        "量子化"
+      ],
+      [
+        "4ビット",
+        "4bit",
+        "4-bit"
+      ],
+      [
+        "LoRA"
+      ]
+    ],
+    "reference_source": "data/glossary.json"
+  },
+  {
+    "id": "overfitting_seen",
+    "category": "seen",
+    "domain": "general",
+    "question": "「過学習」とは何ですか？",
+    "query": "過学習",
+    "expected_term_id": "overfitting",
+    "reference_answer": "学習データにだけ過度に適合し、未知の入力に対する性能が落ちる状態。学習に使わない検証データで性能を測って気づく。",
+    "keyword_groups": [
+      [
+        "学習データ",
+        "訓練データ",
+        "学習に使った"
+      ],
+      [
+        "未知",
+        "新しい",
+        "未学習",
+        "汎化"
+      ],
+      [
+        "落ち",
+        "低下",
+        "悪く"
+      ]
+    ],
+    "reference_source": "data/glossary.json"
+  },
+  {
+    "id": "overfitting_paraphrase",
+    "category": "paraphrase",
+    "domain": "general",
+    "question": "過学習が起きると、学習に使った問題と未知の問題への対応はどうなりますか？",
+    "query": "過学習",
+    "expected_term_id": "overfitting",
+    "reference_answer": "学習データにだけ過度に適合し、未知の入力に対する性能が落ちる状態。学習に使わない検証データで性能を測って気づく。",
+    "keyword_groups": [
+      [
+        "学習データ",
+        "訓練データ",
+        "学習に使った"
+      ],
+      [
+        "未知",
+        "新しい",
+        "未学習",
+        "汎化"
+      ],
+      [
+        "落ち",
+        "低下",
+        "悪く"
+      ]
+    ],
+    "reference_source": "data/glossary.json"
+  },
+  {
+    "id": "lec-start-tag_seen",
+    "category": "seen",
+    "domain": "course_specific",
+    "question": "「lecNN-start タグ」とは何ですか？",
+    "query": "lecNN-start タグ",
+    "expected_term_id": "lec-start-tag",
+    "reference_answer": "AIE2026の講座repoで、各回の演習開始時点のコードに付けているGitタグ（例：lec03-start）。前の回が終わっていなくても、このタグからブランチを作ればその回の演習を始められる。",
+    "keyword_groups": [
+      [
+        "タグ"
+      ],
+      [
+        "開始",
+        "始め",
+        "スタート"
+      ],
+      [
+        "演習",
+        "コード"
+      ]
+    ],
+    "reference_source": "data/glossary.json"
+  },
+  {
+    "id": "lec-start-tag_paraphrase",
+    "category": "paraphrase",
+    "domain": "course_specific",
+    "question": "lecNN-start タグを使うと、前の回を終えていなくても何ができますか？",
+    "query": "lecNN-start タグ",
+    "expected_term_id": "lec-start-tag",
+    "reference_answer": "AIE2026の講座repoで、各回の演習開始時点のコードに付けているGitタグ（例：lec03-start）。前の回が終わっていなくても、このタグからブランチを作ればその回の演習を始められる。",
+    "keyword_groups": [
+      [
+        "タグ"
+      ],
+      [
+        "開始",
+        "始め",
+        "スタート"
+      ],
+      [
+        "演習",
+        "コード"
+      ]
+    ],
+    "reference_source": "data/glossary.json"
+  },
+  {
+    "id": "homework-levels_seen",
+    "category": "seen",
+    "domain": "course_specific",
+    "question": "「宿題の3レベル」とは何ですか？",
+    "query": "宿題の3レベル",
+    "expected_term_id": "homework-levels",
+    "reference_answer": "AIE2026の宿題の構成。「基礎（講義内容の確認）」「実装（自分でコードを書く）」「発展（調査や試行）」の3段階があり、どれか1つに取り組めばその回の宿題は完了。原則として採点はしない。",
+    "keyword_groups": [
+      [
+        "基礎"
+      ],
+      [
+        "実装"
+      ],
+      [
+        "発展"
+      ],
+      [
+        "1つ",
+        "一つ",
+        "どれか",
+        "いずれか"
+      ]
+    ],
+    "reference_source": "data/glossary.json"
+  },
+  {
+    "id": "homework-levels_paraphrase",
+    "category": "paraphrase",
+    "domain": "course_specific",
+    "question": "宿題の3レベルには何があり、全部取り組む必要がありますか？",
+    "query": "宿題の3レベル",
+    "expected_term_id": "homework-levels",
+    "reference_answer": "AIE2026の宿題の構成。「基礎（講義内容の確認）」「実装（自分でコードを書く）」「発展（調査や試行）」の3段階があり、どれか1つに取り組めばその回の宿題は完了。原則として採点はしない。",
+    "keyword_groups": [
+      [
+        "基礎"
+      ],
+      [
+        "実装"
+      ],
+      [
+        "発展"
+      ],
+      [
+        "1つ",
+        "一つ",
+        "どれか",
+        "いずれか"
+      ]
+    ],
+    "reference_source": "data/glossary.json"
+  },
+  {
+    "id": "answer-md_seen",
+    "category": "seen",
+    "domain": "course_specific",
+    "question": "「answer.md」とは何ですか？",
+    "query": "answer.md",
+    "expected_term_id": "answer-md",
+    "reference_answer": "AIE2026で各回の演習・宿題の結果を書くファイル。lectures/NN/answer.md にあり、取り組んだレベル・やったこと・結果・気づきを記入して、作業ブランチから自分のforkの main へPRを出して提出する。",
+    "keyword_groups": [
+      [
+        "演習",
+        "宿題"
+      ],
+      [
+        "結果",
+        "気づき",
+        "考察"
+      ],
+      [
+        "PR",
+        "プルリクエスト"
+      ]
+    ],
+    "reference_source": "data/glossary.json"
+  },
+  {
+    "id": "answer-md_paraphrase",
+    "category": "paraphrase",
+    "domain": "course_specific",
+    "question": "answer.mdには何を書き、どうやって提出しますか？",
+    "query": "answer.md",
+    "expected_term_id": "answer-md",
+    "reference_answer": "AIE2026で各回の演習・宿題の結果を書くファイル。lectures/NN/answer.md にあり、取り組んだレベル・やったこと・結果・気づきを記入して、作業ブランチから自分のforkの main へPRを出して提出する。",
+    "keyword_groups": [
+      [
+        "演習",
+        "宿題"
+      ],
+      [
+        "結果",
+        "気づき",
+        "考察"
+      ],
+      [
+        "PR",
+        "プルリクエスト"
+      ]
+    ],
+    "reference_source": "data/glossary.json"
+  },
+  {
+    "id": "dropout_outside",
+    "category": "not_in_glossary",
+    "domain": "general",
+    "question": "「ドロップアウト」とは何ですか？",
+    "query": "ドロップアウト",
+    "expected_term_id": null,
+    "reference_answer": "学習中にニューロンなどをランダムに無効化し、過学習を抑える正則化手法。",
+    "keyword_groups": [
+      [
+        "ランダム",
+        "確率的"
+      ],
+      [
+        "無効",
+        "除外",
+        "落と",
+        "ゼロ",
+        "使わない"
+      ],
+      [
+        "過学習",
+        "正則化"
+      ]
+    ],
+    "reference_source": "https://www.jmlr.org/papers/v15/srivastava14a.html"
+  },
+  {
+    "id": "gradient-descent_outside",
+    "category": "not_in_glossary",
+    "domain": "general",
+    "question": "「勾配降下法」とは何ですか？",
+    "query": "勾配降下法",
+    "expected_term_id": null,
+    "reference_answer": "損失関数の勾配を使い、損失が小さくなる方向へ重みなどのパラメータを繰り返し更新する最適化手法。",
+    "keyword_groups": [
+      [
+        "勾配",
+        "微分"
+      ],
+      [
+        "損失",
+        "誤差",
+        "目的関数"
+      ],
+      [
+        "更新",
+        "調整"
+      ],
+      [
+        "減ら",
+        "小さ",
+        "最小",
+        "下が",
+        "減少"
+      ]
+    ],
+    "reference_source": "https://developers.google.com/machine-learning/crash-course/linear-regression/gradient-descent"
+  },
+  {
+    "id": "distillation_outside",
+    "category": "not_in_glossary",
+    "domain": "general",
+    "question": "「知識蒸留」とは何ですか？",
+    "query": "知識蒸留",
+    "expected_term_id": null,
+    "reference_answer": "教師モデルの出力などを使って生徒モデルを学習させ、知識を移す手法。モデルを小さくする用途などに使う。",
+    "keyword_groups": [
+      [
+        "教師",
+        "teacher"
+      ],
+      [
+        "生徒",
+        "student",
+        "小さいモデル",
+        "小さなモデル"
+      ],
+      [
+        "学習",
+        "訓練"
+      ],
+      [
+        "出力",
+        "予測",
+        "分布",
+        "ソフトラベル"
+      ]
+    ],
+    "reference_source": "https://arxiv.org/abs/1503.02531"
+  }
+]

@@ -1,0 +1,401 @@
+{
+  "config": {
+    "base_model": "Qwen/Qwen3.5-0.8B",
+    "revision": "2fc06364715b967f1860aea9cf38778875588b17",
+    "seed": 42,
+    "num_train_epochs": 20,
+    "warmup_steps": 6,
+    "lr": 0.0002,
+    "lora_r": 16,
+    "lora_alpha": 32,
+    "max_seq_len": 512,
+    "max_new_tokens": 256,
+    "gen": {
+      "do_sample": false
+    }
+  },
+  "versions": {
+    "transformers": "5.18.0",
+    "peft": "0.21.1",
+    "trl": "1.14.2",
+    "torch": "2.11.0+cu130"
+  },
+  "method": "LoRA（量子化なし）",
+  "dataset_topic": "講座の用語集",
+  "answer_style": "自然文",
+  "model_receives_reference_at_inference": true,
+  "training_receives_reference": false,
+  "reference": {
+    "terms": 58,
+    "characters": 6927,
+    "max_prompt_tokens": 3559,
+    "model_context_limit": 262144
+  },
+  "after_without_reference": {
+    "label": "after_without_reference",
+    "n": 15,
+    "keyword_rate": 0.6666666666666666,
+    "manual_reviewed": 0,
+    "manual_correct_rate": null,
+    "seconds": 57.335,
+    "by_category": {
+      "seen": {
+        "n": 6,
+        "keyword_rate": 1.0,
+        "manual_reviewed": 0,
+        "manual_correct_rate": null
+      },
+      "paraphrase": {
+        "n": 6,
+        "keyword_rate": 0.6666666666666666,
+        "manual_reviewed": 0,
+        "manual_correct_rate": null
+      },
+      "not_in_glossary": {
+        "n": 3,
+        "keyword_rate": 0.0,
+        "manual_reviewed": 0,
+        "manual_correct_rate": null
+      }
+    }
+  },
+  "dataset": {
+    "terms": 58,
+    "train_examples": 116,
+    "evaluation_questions": 15,
+    "input_sha256": {
+      "glossary.json": "4b614a08a754bf6cf714f905f185ad5ef22e0957c7e64434a4b418edb68c2319",
+      "glossary_sft.jsonl": "af6ac820e0331d8d9af376e3b4cccff1b31f2f0f8bb462839752e3282bbd1081",
+      "evaluation.json": "2b068446ed4ea335e0e3fa6d98d0eecd23a762b5c0b6e84c6fd2e2cf41298286",
+      "glossary_experiment.py": "e90b665e8eeb34c58cdd6120a02cccaa329003a42275901f7888334361b24567",
+      "search_tools.py": "76fe15419707e59d437d9f834b013a6b9c4c56ae7ad964a25dd94154abf9323e"
+    }
+  },
+  "evaluation_notes": {
+    "keyword_rate": "語句による一次確認。意味の内容正解率ではない。",
+    "manual_correct_rate": "全問を手動確認するまで null。",
+    "seen": "学習と同じ質問。未知の質問への汎化とは区別する。",
+    "not_in_glossary": "未掲載でも正しく説明できれば正解。検索の未検出とは別に評価する。",
+    "search_query": "問題文に書かれた用語。正解 ID や参照回答は検索に渡さない。",
+    "model_reference": "学習前後とも用語集全文を渡す。評価専用の正解は追加しない。",
+    "comparison": "資料の有無は同じ20エポック学習後のモデルでも比較する。"
+  },
+  "training": {
+    "seconds": 719.5,
+    "global_step": 300,
+    "epochs": 20.0,
+    "last_logged_training_loss": 0.06648399829864501,
+    "loss_history": [
+      {
+        "step": 5,
+        "training_loss": 3.705674743652344
+      },
+      {
+        "step": 10,
+        "training_loss": 2.849417877197266
+      },
+      {
+        "step": 15,
+        "training_loss": 2.501223564147949
+      },
+      {
+        "step": 20,
+        "training_loss": 1.9181711196899414
+      },
+      {
+        "step": 25,
+        "training_loss": 1.7354911804199218
+      },
+      {
+        "step": 30,
+        "training_loss": 1.5908599853515626
+      },
+      {
+        "step": 35,
+        "training_loss": 1.0023521423339843
+      },
+      {
+        "step": 40,
+        "training_loss": 0.9129512786865235
+      },
+      {
+        "step": 45,
+        "training_loss": 0.6770586013793946
+      },
+      {
+        "step": 50,
+        "training_loss": 0.39361798763275146
+      },
+      {
+        "step": 55,
+        "training_loss": 0.3305335521697998
+      },
+      {
+        "step": 60,
+        "training_loss": 0.31786818504333497
+      },
+      {
+        "step": 65,
+        "training_loss": 0.17283641099929808
+      },
+      {
+        "step": 70,
+        "training_loss": 0.1693903923034668
+      },
+      {
+        "step": 75,
+        "training_loss": 0.1727022647857666
+      },
+      {
+        "step": 80,
+        "training_loss": 0.1311141848564148
+      },
+      {
+        "step": 85,
+        "training_loss": 0.1429224967956543
+      },
+      {
+        "step": 90,
+        "training_loss": 0.1252995729446411
+      },
+      {
+        "step": 95,
+        "training_loss": 0.10726412534713745
+      },
+      {
+        "step": 100,
+        "training_loss": 0.11335214376449584
+      },
+      {
+        "step": 105,
+        "training_loss": 0.10452344417572021
+      },
+      {
+        "step": 110,
+        "training_loss": 0.08999866247177124
+      },
+      {
+        "step": 115,
+        "training_loss": 0.09793510437011718
+      },
+      {
+        "step": 120,
+        "training_loss": 0.11258127689361572
+      },
+      {
+        "step": 125,
+        "training_loss": 0.09366897940635681
+      },
+      {
+        "step": 130,
+        "training_loss": 0.09684768319129944
+      },
+      {
+        "step": 135,
+        "training_loss": 0.10095453262329102
+      },
+      {
+        "step": 140,
+        "training_loss": 0.08472577929496765
+      },
+      {
+        "step": 145,
+        "training_loss": 0.08447819948196411
+      },
+      {
+        "step": 150,
+        "training_loss": 0.08716724514961242
+      },
+      {
+        "step": 155,
+        "training_loss": 0.07576651573181152
+      },
+      {
+        "step": 160,
+        "training_loss": 0.08078650236129761
+      },
+      {
+        "step": 165,
+        "training_loss": 0.08349011540412903
+      },
+      {
+        "step": 170,
+        "training_loss": 0.07188496589660645
+      },
+      {
+        "step": 175,
+        "training_loss": 0.07423426508903504
+      },
+      {
+        "step": 180,
+        "training_loss": 0.08984858989715576
+      },
+      {
+        "step": 185,
+        "training_loss": 0.07657585144042969
+      },
+      {
+        "step": 190,
+        "training_loss": 0.07637534141540528
+      },
+      {
+        "step": 195,
+        "training_loss": 0.07772483229637146
+      },
+      {
+        "step": 200,
+        "training_loss": 0.07104653716087342
+      },
+      {
+        "step": 205,
+        "training_loss": 0.07507499456405639
+      },
+      {
+        "step": 210,
+        "training_loss": 0.0754597008228302
+      },
+      {
+        "step": 215,
+        "training_loss": 0.07351762056350708
+      },
+      {
+        "step": 220,
+        "training_loss": 0.07335441112518311
+      },
+      {
+        "step": 225,
+        "training_loss": 0.07587790489196777
+      },
+      {
+        "step": 230,
+        "training_loss": 0.07026003003120422
+      },
+      {
+        "step": 235,
+        "training_loss": 0.07051317691802979
+      },
+      {
+        "step": 240,
+        "training_loss": 0.07568542957305908
+      },
+      {
+        "step": 245,
+        "training_loss": 0.0686285674571991
+      },
+      {
+        "step": 250,
+        "training_loss": 0.07167061567306518
+      },
+      {
+        "step": 255,
+        "training_loss": 0.07368999123573303
+      },
+      {
+        "step": 260,
+        "training_loss": 0.06808746457099915
+      },
+      {
+        "step": 265,
+        "training_loss": 0.0719930112361908
+      },
+      {
+        "step": 270,
+        "training_loss": 0.0712661623954773
+      },
+      {
+        "step": 275,
+        "training_loss": 0.07188732624053955
+      },
+      {
+        "step": 280,
+        "training_loss": 0.06787816286087037
+      },
+      {
+        "step": 285,
+        "training_loss": 0.07097514271736145
+      },
+      {
+        "step": 290,
+        "training_loss": 0.0717757523059845
+      },
+      {
+        "step": 295,
+        "training_loss": 0.07140376567840576
+      },
+      {
+        "step": 300,
+        "training_loss": 0.06648399829864501
+      }
+    ],
+    "logging_steps": 5
+  },
+  "before": {
+    "label": "before",
+    "n": 15,
+    "keyword_rate": 0.4666666666666667,
+    "manual_reviewed": 0,
+    "manual_correct_rate": null,
+    "seconds": 176.124,
+    "by_category": {
+      "seen": {
+        "n": 6,
+        "keyword_rate": 0.6666666666666666,
+        "manual_reviewed": 0,
+        "manual_correct_rate": null
+      },
+      "paraphrase": {
+        "n": 6,
+        "keyword_rate": 0.5,
+        "manual_reviewed": 0,
+        "manual_correct_rate": null
+      },
+      "not_in_glossary": {
+        "n": 3,
+        "keyword_rate": 0.0,
+        "manual_reviewed": 0,
+        "manual_correct_rate": null
+      }
+    }
+  },
+  "after": {
+    "label": "after",
+    "n": 15,
+    "keyword_rate": 0.5333333333333333,
+    "manual_reviewed": 0,
+    "manual_correct_rate": null,
+    "seconds": 76.543,
+    "by_category": {
+      "seen": {
+        "n": 6,
+        "keyword_rate": 0.6666666666666666,
+        "manual_reviewed": 0,
+        "manual_correct_rate": null
+      },
+      "paraphrase": {
+        "n": 6,
+        "keyword_rate": 0.6666666666666666,
+        "manual_reviewed": 0,
+        "manual_correct_rate": null
+      },
+      "not_in_glossary": {
+        "n": 3,
+        "keyword_rate": 0.0,
+        "manual_reviewed": 0,
+        "manual_correct_rate": null
+      }
+    }
+  },
+  "search": {
+    "label": "search",
+    "n": 15,
+    "seconds": 0.007,
+    "listed_n": 12,
+    "listed_top1_hit_rate": 1.0,
+    "unlisted_n": 3,
+    "unlisted_not_found_rate": 1.0
+  },
+  "keyword_regressed": [
+    "qlora_paraphrase"
+  ],
+  "executed_training_myself": true
+}

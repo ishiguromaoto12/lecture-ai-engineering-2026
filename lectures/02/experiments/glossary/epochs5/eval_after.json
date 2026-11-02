@@ -1,0 +1,322 @@
+{
+  "summary": {
+    "label": "after",
+    "n": 15,
+    "keyword_rate": 0.13333333333333333,
+    "manual_reviewed": 0,
+    "manual_correct_rate": null,
+    "seconds": 59.851,
+    "by_category": {
+      "seen": {
+        "n": 6,
+        "keyword_rate": 0.3333333333333333,
+        "manual_reviewed": 0,
+        "manual_correct_rate": null
+      },
+      "paraphrase": {
+        "n": 6,
+        "keyword_rate": 0.0,
+        "manual_reviewed": 0,
+        "manual_correct_rate": null
+      },
+      "not_in_glossary": {
+        "n": 3,
+        "keyword_rate": 0.0,
+        "manual_reviewed": 0,
+        "manual_correct_rate": null
+      }
+    }
+  },
+  "rows": [
+    {
+      "id": "lora_seen",
+      "category": "seen",
+      "question": "「LoRA」とは何ですか？",
+      "raw": "事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習する手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。",
+      "reference_answer": "事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。",
+      "keyword_ok": true,
+      "missing_keyword_groups": [],
+      "manual_correct": null
+    },
+    {
+      "id": "lora_paraphrase",
+      "category": "paraphrase",
+      "question": "LoRAでは元の重みをどう扱い、何を学習しますか？",
+      "raw": "2つの行列の積（重み×入力）で誤差を生成し、その誤差にだけ小さな学習率で重みを更新する、という「学習する領域と更新する量」を絞る手法。本講座の第2回演習ではLoRAを扱う。",
+      "reference_answer": "事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。",
+      "keyword_ok": false,
+      "missing_keyword_groups": [
+        [
+          "固定",
+          "更新しない",
+          "凍結"
+        ],
+        [
+          "低ランク",
+          "小さな行列",
+          "低いランク"
+        ]
+      ],
+      "manual_correct": null
+    },
+    {
+      "id": "qlora_seen",
+      "category": "seen",
+      "question": "「QLoRA」とは何ですか？",
+      "raw": "ベースモデルの重みを4ビットや1ビットで圧縮したメモリ使用量を減った後で、LoRAで学習する手法。より大きなモデルを小さなメモリで扱える。",
+      "reference_answer": "ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。",
+      "keyword_ok": false,
+      "missing_keyword_groups": [
+        [
+          "量子化"
+        ]
+      ],
+      "manual_correct": null
+    },
+    {
+      "id": "qlora_paraphrase",
+      "category": "paraphrase",
+      "question": "QLoRAはどのようにメモリを節約して追加学習しますか？",
+      "raw": "1 つの重み（2ビットで表す）でモデルを拡張できる。同じ入力・出力で、1ビットで表す重みを2ビットにするとメモリが2倍、2ビットで表す重みを1ビットにするとメモリが半分になる。同じ入力・出力で、1ビットで表す重みを2ビットにするとメモリが2倍、2ビットで表す重みを1ビットにするとメモリが半分になる。同じ入力・出力で、1ビットで表す重みを2ビットにするとメモリが2倍、2ビットで表す重みを1ビットにするとメモリが半分になる。",
+      "reference_answer": "ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。",
+      "keyword_ok": false,
+      "missing_keyword_groups": [
+        [
+          "量子化"
+        ],
+        [
+          "4ビット",
+          "4bit",
+          "4-bit"
+        ],
+        [
+          "LoRA"
+        ]
+      ],
+      "manual_correct": null
+    },
+    {
+      "id": "overfitting_seen",
+      "category": "seen",
+      "question": "「過学習」とは何ですか？",
+      "raw": "学習データにだけ過度に適合し、未知の入力に対する性能が落ちる状態。学習に使わない検証データで性能を測って気づく。",
+      "reference_answer": "学習データにだけ過度に適合し、未知の入力に対する性能が落ちる状態。学習に使わない検証データで性能を測って気づく。",
+      "keyword_ok": true,
+      "missing_keyword_groups": [],
+      "manual_correct": null
+    },
+    {
+      "id": "overfitting_paraphrase",
+      "category": "paraphrase",
+      "question": "過学習が起きると、学習に使った問題と未知の問題への対応はどうなりますか？",
+      "raw": "学習データにだけ集中し、未知の問題への対応が弱くなる。テストデータや外部入力に渡すことで、外部入力に合った回答を求める。評価データ（テストや外部入力）で性能を測る。",
+      "reference_answer": "学習データにだけ過度に適合し、未知の入力に対する性能が落ちる状態。学習に使わない検証データで性能を測って気づく。",
+      "keyword_ok": false,
+      "missing_keyword_groups": [
+        [
+          "落ち",
+          "低下",
+          "悪く"
+        ]
+      ],
+      "manual_correct": null
+    },
+    {
+      "id": "lec-start-tag_seen",
+      "category": "seen",
+      "question": "「lecNN-start タグ」とは何ですか？",
+      "raw": "AIE2026の講座開始時の検索・フィルタリング用タグ。講座番号のZと開始時の時間（HH:MM）を結合して与える例は「Z2026031509」。本講座はZ2026031510。",
+      "reference_answer": "AIE2026の講座repoで、各回の演習開始時点のコードに付けているGitタグ（例：lec03-start）。前の回が終わっていなくても、このタグからブランチを作ればその回の演習を始められる。",
+      "keyword_ok": false,
+      "missing_keyword_groups": [
+        [
+          "演習",
+          "コード"
+        ]
+      ],
+      "manual_correct": null
+    },
+    {
+      "id": "lec-start-tag_paraphrase",
+      "category": "paraphrase",
+      "question": "lecNN-start タグを使うと、前の回を終えていなくても何ができますか？",
+      "raw": "AIE2026の講座開始。回番号を数字で書くと、開始・続き・終了・スキマの4つの操作が同じ形式で表される。回を数字で書かないと、続きやスキマの指示文が読みにくい。",
+      "reference_answer": "AIE2026の講座repoで、各回の演習開始時点のコードに付けているGitタグ（例：lec03-start）。前の回が終わっていなくても、このタグからブランチを作ればその回の演習を始められる。",
+      "keyword_ok": false,
+      "missing_keyword_groups": [
+        [
+          "タグ"
+        ],
+        [
+          "演習",
+          "コード"
+        ]
+      ],
+      "manual_correct": null
+    },
+    {
+      "id": "homework-levels_seen",
+      "category": "seen",
+      "question": "「宿題の3レベル」とは何ですか？",
+      "raw": "AIE2026の宿題の構成。基礎知識の確認（レベル1）、実践的な作業や演習（レベル2）、研究や発表などの成果展示（レベル3）。どのレベルをどれくらい取るかを決めるのは宿題の指導者（教頭）の判断の余地がある。",
+      "reference_answer": "AIE2026の宿題の構成。「基礎（講義内容の確認）」「実装（自分でコードを書く）」「発展（調査や試行）」の3段階があり、どれか1つに取り組めばその回の宿題は完了。原則として採点はしない。",
+      "keyword_ok": false,
+      "missing_keyword_groups": [
+        [
+          "実装"
+        ],
+        [
+          "発展"
+        ],
+        [
+          "1つ",
+          "一つ",
+          "どれか",
+          "いずれか"
+        ]
+      ],
+      "manual_correct": null
+    },
+    {
+      "id": "homework-levels_paraphrase",
+      "category": "paraphrase",
+      "question": "宿題の3レベルには何があり、全部取り組む必要がありますか？",
+      "raw": "AIE2026の宿題の構成。基礎知識の確認と、自分で選んだ方向（基礎・演習・研究）を1つにまとめた作業。どのレベルを1つに絞っても合格できる。",
+      "reference_answer": "AIE2026の宿題の構成。「基礎（講義内容の確認）」「実装（自分でコードを書く）」「発展（調査や試行）」の3段階があり、どれか1つに取り組めばその回の宿題は完了。原則として採点はしない。",
+      "keyword_ok": false,
+      "missing_keyword_groups": [
+        [
+          "実装"
+        ],
+        [
+          "発展"
+        ]
+      ],
+      "manual_correct": null
+    },
+    {
+      "id": "answer-md_seen",
+      "category": "seen",
+      "question": "「answer.md」とは何ですか？",
+      "raw": "AIE2026の演習・宿題の回答と評価基準を.md として書く。提出時に渡す（ファイル名は answer.md）。",
+      "reference_answer": "AIE2026で各回の演習・宿題の結果を書くファイル。lectures/NN/answer.md にあり、取り組んだレベル・やったこと・結果・気づきを記入して、作業ブランチから自分のforkの main へPRを出して提出する。",
+      "keyword_ok": false,
+      "missing_keyword_groups": [
+        [
+          "結果",
+          "気づき",
+          "考察"
+        ],
+        [
+          "PR",
+          "プルリクエスト"
+        ]
+      ],
+      "manual_correct": null
+    },
+    {
+      "id": "answer-md_paraphrase",
+      "category": "paraphrase",
+      "question": "answer.mdには何を書き、どうやって提出しますか？",
+      "raw": "AIE2026の演習集の回答。各回の演習で使う回答文面（回の番号、演習名、質問番号、回答内容）。提出はGitHubのcommitで、branchは「answer.md」。",
+      "reference_answer": "AIE2026で各回の演習・宿題の結果を書くファイル。lectures/NN/answer.md にあり、取り組んだレベル・やったこと・結果・気づきを記入して、作業ブランチから自分のforkの main へPRを出して提出する。",
+      "keyword_ok": false,
+      "missing_keyword_groups": [
+        [
+          "結果",
+          "気づき",
+          "考察"
+        ],
+        [
+          "PR",
+          "プルリクエスト"
+        ]
+      ],
+      "manual_correct": null
+    },
+    {
+      "id": "dropout_outside",
+      "category": "not_in_glossary",
+      "question": "「ドロップアウト」とは何ですか？",
+      "raw": "モデルが望ましくない出力や内容を出さないように、出力の先を少し切り離して質問する技術。出力が正しいか、内容が合うかを確認できる。本講座ではLLMを単にツールとして使うため、質問の先を切り離さない（例：「Pythonで文章を書き出すツール」）。",
+      "reference_answer": "学習中にニューロンなどをランダムに無効化し、過学習を抑える正則化手法。",
+      "keyword_ok": false,
+      "missing_keyword_groups": [
+        [
+          "ランダム",
+          "確率的"
+        ],
+        [
+          "無効",
+          "除外",
+          "落と",
+          "ゼロ",
+          "使わない"
+        ],
+        [
+          "過学習",
+          "正則化"
+        ]
+      ],
+      "manual_correct": null
+    },
+    {
+      "id": "gradient-descent_outside",
+      "category": "not_in_glossary",
+      "question": "「勾配降下法」とは何ですか？",
+      "raw": "AIE2026の演習・宿題で、宿題の解答を1つのメッセージで書き、モデルに渡す方法の総称。渡すデータは、モデルの意識を上げるレベルで、少し上回るほど詳細になる。本講座の第2回演習は勾配降下法で、第3回宿題は自分で書く。",
+      "reference_answer": "損失関数の勾配を使い、損失が小さくなる方向へ重みなどのパラメータを繰り返し更新する最適化手法。",
+      "keyword_ok": false,
+      "missing_keyword_groups": [
+        [
+          "損失",
+          "誤差",
+          "目的関数"
+        ],
+        [
+          "更新",
+          "調整"
+        ],
+        [
+          "減ら",
+          "小さ",
+          "最小",
+          "下が",
+          "減少"
+        ]
+      ],
+      "manual_correct": null
+    },
+    {
+      "id": "distillation_outside",
+      "category": "not_in_glossary",
+      "question": "「知識蒸留」とは何ですか？",
+      "raw": "AIE2026の宿題・演習の準備・進め方。講義内容や演習の進め方、宿題の提出・評価の判断・結果の分析を自分で決定する。提出前に必ず講義録や演習録を確認する。",
+      "reference_answer": "教師モデルの出力などを使って生徒モデルを学習させ、知識を移す手法。モデルを小さくする用途などに使う。",
+      "keyword_ok": false,
+      "missing_keyword_groups": [
+        [
+          "教師",
+          "teacher"
+        ],
+        [
+          "生徒",
+          "student",
+          "小さいモデル",
+          "小さなモデル"
+        ],
+        [
+          "学習",
+          "訓練"
+        ],
+        [
+          "出力",
+          "予測",
+          "分布",
+          "ソフトラベル"
+        ]
+      ],
+      "manual_correct": null
+    }
+  ]
+}

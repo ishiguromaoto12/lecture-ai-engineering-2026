@@ -1,0 +1,8 @@
+{
+  "examples": 116,
+  "min_tokens": 45,
+  "max_tokens": 118,
+  "max_seq_len": 512,
+  "over_limit_examples": 0,
+  "method": "render chat as text, then count input_ids; no model training or generation"
+}

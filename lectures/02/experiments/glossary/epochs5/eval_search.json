@@ -1,0 +1,368 @@
+{
+  "summary": {
+    "label": "search",
+    "n": 15,
+    "seconds": 0.006,
+    "listed_n": 12,
+    "listed_top1_hit_rate": 1.0,
+    "unlisted_n": 3,
+    "unlisted_not_found_rate": 1.0
+  },
+  "rows": [
+    {
+      "id": "lora_seen",
+      "category": "seen",
+      "question": "「LoRA」とは何ですか？",
+      "query": "LoRA",
+      "raw_search_result": "[{\"term\": \"LoRA\", \"lecture\": 2, \"definition\": \"事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。\", \"related\": [\"peft\", \"lora-rank\", \"qlora\"]}, {\"term\": \"ランク（LoRAのr）\", \"lecture\": 2, \"definition\": \"LoRAで使う低ランク行列の大きさを決めるハイパーパラメータ。大きいほど表現力が上がるが、学習するパラメータとメモリも増える。\", \"related\": [\"lora\"]}, {\"term\": \"QLoRA\", \"lecture\": 2, \"definition\": \"ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。\", \"related\": [\"lora\", \"quantization\"]}]",
+      "raw": "事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。",
+      "hits": [
+        {
+          "term": "LoRA",
+          "lecture": 2,
+          "definition": "事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。",
+          "related": [
+            "peft",
+            "lora-rank",
+            "qlora"
+          ]
+        },
+        {
+          "term": "ランク（LoRAのr）",
+          "lecture": 2,
+          "definition": "LoRAで使う低ランク行列の大きさを決めるハイパーパラメータ。大きいほど表現力が上がるが、学習するパラメータとメモリも増える。",
+          "related": [
+            "lora"
+          ]
+        },
+        {
+          "term": "QLoRA",
+          "lecture": 2,
+          "definition": "ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。",
+          "related": [
+            "lora",
+            "quantization"
+          ]
+        }
+      ],
+      "found_term_id": "lora",
+      "retrieval_ok": true
+    },
+    {
+      "id": "lora_paraphrase",
+      "category": "paraphrase",
+      "question": "LoRAでは元の重みをどう扱い、何を学習しますか？",
+      "query": "LoRA",
+      "raw_search_result": "[{\"term\": \"LoRA\", \"lecture\": 2, \"definition\": \"事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。\", \"related\": [\"peft\", \"lora-rank\", \"qlora\"]}, {\"term\": \"ランク（LoRAのr）\", \"lecture\": 2, \"definition\": \"LoRAで使う低ランク行列の大きさを決めるハイパーパラメータ。大きいほど表現力が上がるが、学習するパラメータとメモリも増える。\", \"related\": [\"lora\"]}, {\"term\": \"QLoRA\", \"lecture\": 2, \"definition\": \"ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。\", \"related\": [\"lora\", \"quantization\"]}]",
+      "raw": "事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。",
+      "hits": [
+        {
+          "term": "LoRA",
+          "lecture": 2,
+          "definition": "事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。",
+          "related": [
+            "peft",
+            "lora-rank",
+            "qlora"
+          ]
+        },
+        {
+          "term": "ランク（LoRAのr）",
+          "lecture": 2,
+          "definition": "LoRAで使う低ランク行列の大きさを決めるハイパーパラメータ。大きいほど表現力が上がるが、学習するパラメータとメモリも増える。",
+          "related": [
+            "lora"
+          ]
+        },
+        {
+          "term": "QLoRA",
+          "lecture": 2,
+          "definition": "ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。",
+          "related": [
+            "lora",
+            "quantization"
+          ]
+        }
+      ],
+      "found_term_id": "lora",
+      "retrieval_ok": true
+    },
+    {
+      "id": "qlora_seen",
+      "category": "seen",
+      "question": "「QLoRA」とは何ですか？",
+      "query": "QLoRA",
+      "raw_search_result": "[{\"term\": \"QLoRA\", \"lecture\": 2, \"definition\": \"ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。\", \"related\": [\"lora\", \"quantization\"]}, {\"term\": \"LoRA\", \"lecture\": 2, \"definition\": \"事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。\", \"related\": [\"peft\", \"lora-rank\", \"qlora\"]}]",
+      "raw": "ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。",
+      "hits": [
+        {
+          "term": "QLoRA",
+          "lecture": 2,
+          "definition": "ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。",
+          "related": [
+            "lora",
+            "quantization"
+          ]
+        },
+        {
+          "term": "LoRA",
+          "lecture": 2,
+          "definition": "事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。",
+          "related": [
+            "peft",
+            "lora-rank",
+            "qlora"
+          ]
+        }
+      ],
+      "found_term_id": "qlora",
+      "retrieval_ok": true
+    },
+    {
+      "id": "qlora_paraphrase",
+      "category": "paraphrase",
+      "question": "QLoRAはどのようにメモリを節約して追加学習しますか？",
+      "query": "QLoRA",
+      "raw_search_result": "[{\"term\": \"QLoRA\", \"lecture\": 2, \"definition\": \"ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。\", \"related\": [\"lora\", \"quantization\"]}, {\"term\": \"LoRA\", \"lecture\": 2, \"definition\": \"事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。\", \"related\": [\"peft\", \"lora-rank\", \"qlora\"]}]",
+      "raw": "ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。",
+      "hits": [
+        {
+          "term": "QLoRA",
+          "lecture": 2,
+          "definition": "ベースモデルの重みを4ビットなどに量子化してメモリを節約したうえで、LoRAで学習する手法。より大きなモデルを小さなGPUで扱える。本講座の第2回演習ではモデルがGPUに載るためLoRAで学習し、4ビットで読み込んだときのメモリと出力の違いを発展で比べる。",
+          "related": [
+            "lora",
+            "quantization"
+          ]
+        },
+        {
+          "term": "LoRA",
+          "lecture": 2,
+          "definition": "事前学習済みの重みは固定したまま、重みの更新分を2つの小さな行列の積（低ランク行列）で表し、その小さな行列だけを学習するPEFT手法。学習するパラメータが少なく、学習結果（アダプタ）も小さいファイルで保存できる。本講座の第2回演習ではLoRAを扱う。",
+          "related": [
+            "peft",
+            "lora-rank",
+            "qlora"
+          ]
+        }
+      ],
+      "found_term_id": "qlora",
+      "retrieval_ok": true
+    },
+    {
+      "id": "overfitting_seen",
+      "category": "seen",
+      "question": "「過学習」とは何ですか？",
+      "query": "過学習",
+      "raw_search_result": "[{\"term\": \"過学習\", \"lecture\": 2, \"definition\": \"学習データにだけ過度に適合し、未知の入力に対する性能が落ちる状態。学習に使わない検証データで性能を測って気づく。\", \"related\": [\"epoch\", \"evaluation-loop\"]}, {\"term\": \"エポック\", \"lecture\": 2, \"definition\": \"学習データ全体を1周学習することを1エポックと数える。回数を増やしすぎると過学習しやすい。\", \"related\": [\"overfitting\", \"learning-rate\"]}]",
+      "raw": "学習データにだけ過度に適合し、未知の入力に対する性能が落ちる状態。学習に使わない検証データで性能を測って気づく。",
+      "hits": [
+        {
+          "term": "過学習",
+          "lecture": 2,
+          "definition": "学習データにだけ過度に適合し、未知の入力に対する性能が落ちる状態。学習に使わない検証データで性能を測って気づく。",
+          "related": [
+            "epoch",
+            "evaluation-loop"
+          ]
+        },
+        {
+          "term": "エポック",
+          "lecture": 2,
+          "definition": "学習データ全体を1周学習することを1エポックと数える。回数を増やしすぎると過学習しやすい。",
+          "related": [
+            "overfitting",
+            "learning-rate"
+          ]
+        }
+      ],
+      "found_term_id": "overfitting",
+      "retrieval_ok": true
+    },
+    {
+      "id": "overfitting_paraphrase",
+      "category": "paraphrase",
+      "question": "過学習が起きると、学習に使った問題と未知の問題への対応はどうなりますか？",
+      "query": "過学習",
+      "raw_search_result": "[{\"term\": \"過学習\", \"lecture\": 2, \"definition\": \"学習データにだけ過度に適合し、未知の入力に対する性能が落ちる状態。学習に使わない検証データで性能を測って気づく。\", \"related\": [\"epoch\", \"evaluation-loop\"]}, {\"term\": \"エポック\", \"lecture\": 2, \"definition\": \"学習データ全体を1周学習することを1エポックと数える。回数を増やしすぎると過学習しやすい。\", \"related\": [\"overfitting\", \"learning-rate\"]}]",
+      "raw": "学習データにだけ過度に適合し、未知の入力に対する性能が落ちる状態。学習に使わない検証データで性能を測って気づく。",
+      "hits": [
+        {
+          "term": "過学習",
+          "lecture": 2,
+          "definition": "学習データにだけ過度に適合し、未知の入力に対する性能が落ちる状態。学習に使わない検証データで性能を測って気づく。",
+          "related": [
+            "epoch",
+            "evaluation-loop"
+          ]
+        },
+        {
+          "term": "エポック",
+          "lecture": 2,
+          "definition": "学習データ全体を1周学習することを1エポックと数える。回数を増やしすぎると過学習しやすい。",
+          "related": [
+            "overfitting",
+            "learning-rate"
+          ]
+        }
+      ],
+      "found_term_id": "overfitting",
+      "retrieval_ok": true
+    },
+    {
+      "id": "lec-start-tag_seen",
+      "category": "seen",
+      "question": "「lecNN-start タグ」とは何ですか？",
+      "query": "lecNN-start タグ",
+      "raw_search_result": "[{\"term\": \"lecNN-start タグ\", \"lecture\": 1, \"definition\": \"AIE2026の講座repoで、各回の演習開始時点のコードに付けているGitタグ（例：lec03-start）。前の回が終わっていなくても、このタグからブランチを作ればその回の演習を始められる。\", \"related\": [\"branch\"]}]",
+      "raw": "AIE2026の講座repoで、各回の演習開始時点のコードに付けているGitタグ（例：lec03-start）。前の回が終わっていなくても、このタグからブランチを作ればその回の演習を始められる。",
+      "hits": [
+        {
+          "term": "lecNN-start タグ",
+          "lecture": 1,
+          "definition": "AIE2026の講座repoで、各回の演習開始時点のコードに付けているGitタグ（例：lec03-start）。前の回が終わっていなくても、このタグからブランチを作ればその回の演習を始められる。",
+          "related": [
+            "branch"
+          ]
+        }
+      ],
+      "found_term_id": "lec-start-tag",
+      "retrieval_ok": true
+    },
+    {
+      "id": "lec-start-tag_paraphrase",
+      "category": "paraphrase",
+      "question": "lecNN-start タグを使うと、前の回を終えていなくても何ができますか？",
+      "query": "lecNN-start タグ",
+      "raw_search_result": "[{\"term\": \"lecNN-start タグ\", \"lecture\": 1, \"definition\": \"AIE2026の講座repoで、各回の演習開始時点のコードに付けているGitタグ（例：lec03-start）。前の回が終わっていなくても、このタグからブランチを作ればその回の演習を始められる。\", \"related\": [\"branch\"]}]",
+      "raw": "AIE2026の講座repoで、各回の演習開始時点のコードに付けているGitタグ（例：lec03-start）。前の回が終わっていなくても、このタグからブランチを作ればその回の演習を始められる。",
+      "hits": [
+        {
+          "term": "lecNN-start タグ",
+          "lecture": 1,
+          "definition": "AIE2026の講座repoで、各回の演習開始時点のコードに付けているGitタグ（例：lec03-start）。前の回が終わっていなくても、このタグからブランチを作ればその回の演習を始められる。",
+          "related": [
+            "branch"
+          ]
+        }
+      ],
+      "found_term_id": "lec-start-tag",
+      "retrieval_ok": true
+    },
+    {
+      "id": "homework-levels_seen",
+      "category": "seen",
+      "question": "「宿題の3レベル」とは何ですか？",
+      "query": "宿題の3レベル",
+      "raw_search_result": "[{\"term\": \"宿題の3レベル\", \"lecture\": 1, \"definition\": \"AIE2026の宿題の構成。「基礎（講義内容の確認）」「実装（自分でコードを書く）」「発展（調査や試行）」の3段階があり、どれか1つに取り組めばその回の宿題は完了。原則として採点はしない。\", \"related\": [\"answer-md\"]}]",
+      "raw": "AIE2026の宿題の構成。「基礎（講義内容の確認）」「実装（自分でコードを書く）」「発展（調査や試行）」の3段階があり、どれか1つに取り組めばその回の宿題は完了。原則として採点はしない。",
+      "hits": [
+        {
+          "term": "宿題の3レベル",
+          "lecture": 1,
+          "definition": "AIE2026の宿題の構成。「基礎（講義内容の確認）」「実装（自分でコードを書く）」「発展（調査や試行）」の3段階があり、どれか1つに取り組めばその回の宿題は完了。原則として採点はしない。",
+          "related": [
+            "answer-md"
+          ]
+        }
+      ],
+      "found_term_id": "homework-levels",
+      "retrieval_ok": true
+    },
+    {
+      "id": "homework-levels_paraphrase",
+      "category": "paraphrase",
+      "question": "宿題の3レベルには何があり、全部取り組む必要がありますか？",
+      "query": "宿題の3レベル",
+      "raw_search_result": "[{\"term\": \"宿題の3レベル\", \"lecture\": 1, \"definition\": \"AIE2026の宿題の構成。「基礎（講義内容の確認）」「実装（自分でコードを書く）」「発展（調査や試行）」の3段階があり、どれか1つに取り組めばその回の宿題は完了。原則として採点はしない。\", \"related\": [\"answer-md\"]}]",
+      "raw": "AIE2026の宿題の構成。「基礎（講義内容の確認）」「実装（自分でコードを書く）」「発展（調査や試行）」の3段階があり、どれか1つに取り組めばその回の宿題は完了。原則として採点はしない。",
+      "hits": [
+        {
+          "term": "宿題の3レベル",
+          "lecture": 1,
+          "definition": "AIE2026の宿題の構成。「基礎（講義内容の確認）」「実装（自分でコードを書く）」「発展（調査や試行）」の3段階があり、どれか1つに取り組めばその回の宿題は完了。原則として採点はしない。",
+          "related": [
+            "answer-md"
+          ]
+        }
+      ],
+      "found_term_id": "homework-levels",
+      "retrieval_ok": true
+    },
+    {
+      "id": "answer-md_seen",
+      "category": "seen",
+      "question": "「answer.md」とは何ですか？",
+      "query": "answer.md",
+      "raw_search_result": "[{\"term\": \"answer.md\", \"lecture\": 1, \"definition\": \"AIE2026で各回の演習・宿題の結果を書くファイル。lectures/NN/answer.md にあり、取り組んだレベル・やったこと・結果・気づきを記入して、作業ブランチから自分のforkの main へPRを出して提出する。\", \"related\": [\"pull-request\", \"homework-levels\"]}]",
+      "raw": "AIE2026で各回の演習・宿題の結果を書くファイル。lectures/NN/answer.md にあり、取り組んだレベル・やったこと・結果・気づきを記入して、作業ブランチから自分のforkの main へPRを出して提出する。",
+      "hits": [
+        {
+          "term": "answer.md",
+          "lecture": 1,
+          "definition": "AIE2026で各回の演習・宿題の結果を書くファイル。lectures/NN/answer.md にあり、取り組んだレベル・やったこと・結果・気づきを記入して、作業ブランチから自分のforkの main へPRを出して提出する。",
+          "related": [
+            "pull-request",
+            "homework-levels"
+          ]
+        }
+      ],
+      "found_term_id": "answer-md",
+      "retrieval_ok": true
+    },
+    {
+      "id": "answer-md_paraphrase",
+      "category": "paraphrase",
+      "question": "answer.mdには何を書き、どうやって提出しますか？",
+      "query": "answer.md",
+      "raw_search_result": "[{\"term\": \"answer.md\", \"lecture\": 1, \"definition\": \"AIE2026で各回の演習・宿題の結果を書くファイル。lectures/NN/answer.md にあり、取り組んだレベル・やったこと・結果・気づきを記入して、作業ブランチから自分のforkの main へPRを出して提出する。\", \"related\": [\"pull-request\", \"homework-levels\"]}]",
+      "raw": "AIE2026で各回の演習・宿題の結果を書くファイル。lectures/NN/answer.md にあり、取り組んだレベル・やったこと・結果・気づきを記入して、作業ブランチから自分のforkの main へPRを出して提出する。",
+      "hits": [
+        {
+          "term": "answer.md",
+          "lecture": 1,
+          "definition": "AIE2026で各回の演習・宿題の結果を書くファイル。lectures/NN/answer.md にあり、取り組んだレベル・やったこと・結果・気づきを記入して、作業ブランチから自分のforkの main へPRを出して提出する。",
+          "related": [
+            "pull-request",
+            "homework-levels"
+          ]
+        }
+      ],
+      "found_term_id": "answer-md",
+      "retrieval_ok": true
+    },
+    {
+      "id": "dropout_outside",
+      "category": "not_in_glossary",
+      "question": "「ドロップアウト」とは何ですか？",
+      "query": "ドロップアウト",
+      "raw_search_result": "用語集に「ドロップアウト」は見つかりませんでした。",
+      "raw": "用語集に「ドロップアウト」は見つかりませんでした。",
+      "hits": [],
+      "found_term_id": null,
+      "retrieval_ok": null
+    },
+    {
+      "id": "gradient-descent_outside",
+      "category": "not_in_glossary",
+      "question": "「勾配降下法」とは何ですか？",
+      "query": "勾配降下法",
+      "raw_search_result": "用語集に「勾配降下法」は見つかりませんでした。",
+      "raw": "用語集に「勾配降下法」は見つかりませんでした。",
+      "hits": [],
+      "found_term_id": null,
+      "retrieval_ok": null
+    },
+    {
+      "id": "distillation_outside",
+      "category": "not_in_glossary",
+      "question": "「知識蒸留」とは何ですか？",
+      "query": "知識蒸留",
+      "raw_search_result": "用語集に「知識蒸留」は見つかりませんでした。",
+      "raw": "用語集に「知識蒸留」は見つかりませんでした。",
+      "hits": [],
+      "found_term_id": null,
+      "retrieval_ok": null
+    }
+  ]
+}
