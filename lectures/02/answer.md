@@ -187,3 +187,32 @@ Codex で図書館に関する質問の候補を作り、上の 5 項目だけ�
 検索は資料にある定義を直接返すため、出典を確認しやすく、用語集を更新すれば回答も更新できる。今回の範囲では、用語の正確な定義を返す用途には検索が安定していた。ただし適切な用語を検索語にする必要があり、検索結果がないだけでは、その概念が存在しないとは判断できない。学習は回答の書き方や保留する振る舞いを整え、最新の事実は検索で補うという使い分けが考えられる。
 
 元の結果は [experiments/glossary/epochs5/result.json](experiments/glossary/epochs5/result.json) と [experiments/glossary/epochs20_with_reference/result.json](experiments/glossary/epochs20_with_reference/result.json)。今回の結果・学習時間・loss は [experiments/glossary/abstention20/result.json](experiments/glossary/abstention20/result.json)、回答原文と判定理由は [資料あり](experiments/glossary/abstention20/eval_with_reference.json)・[資料なし](experiments/glossary/abstention20/eval_without_reference.json)、実行方法と保存物は [実験記録](experiments/glossary/abstention20/README.md) にまとめた。
+
+### 追加観察：4bit 量子化と回答形式についてのメモ
+
+[lora_faq_tuning.ipynb](experiments/notebooks/lora_faq_tuning.ipynb) でセクション 0〜3、その後セクション 8 を実行した。今回の比較は、どちらも LoRA による追加学習前の同じ基盤モデルで、32bit（量子化なし）と 4bit（NF4）の読み込みを比べたもの。32bit の評価は今回の実行番号 `[7]`、4bit は `[8]` であり、以前の LoRA 学習後の結果とは区別する。セクション 4〜7 に残っている以前の出力は、今回の比較には使っていない。
+
+| 項目 | 32bit（量子化なし） | 4bit |
+| --- | ---: | ---: |
+| 重みのメモリ | 3.01 GB | 0.76 GB |
+| 形式遵守率 | 9.52%（2/21） | 66.67%（14/21） |
+| 内容正解率 | 0%（0/21） | 33.33%（7/21） |
+| 21 問の生成・評価時間 | 21.5 秒 | 44.1 秒 |
+
+32bit と 4bit の両方に、同じプロンプトで「必ず JSON 1 行で答える」「`answer` は文字列、`needs_review` は真偽値」と指示していた。32bit に形式を教えていなかったわけではない。例えば「提出の期限は？」に対する 32bit の回答は次のとおりだった。
+
+```json
+{"answer": "9 月 30 日 23:59"}
+```
+
+JSON で答える点は守っているが、必須の `needs_review` が欠けている。4bit では同じ質問に次のように答え、形式と内容の両方で合格した。
+
+```json
+{"answer": "9 月 30 日 23:59（日本時間）", "needs_review": false}
+```
+
+「追加学習前」は、モデルが何も学習していないという意味ではない。基盤モデルは既に学習済みであり、JSON を書いたり、回答時の指示に従ったりする能力をある程度持っている。ただし、指示を渡しても必要なキーや型を確実に守るとは限らず、今回の 32bit は形式を守れたのが 21 問中 2 問だった。
+
+4bit 量子化は、重みを少ない情報量で近似して保持する操作であり、JSON の形式を新しく学習させる操作ではない。重みの数値が変わることで出力の選ばれ方も変わり、今回は形式を守れる例が増えたと考えられる。学習データ自体が改善されたわけでも、新しい知識を得たと確認できたわけでもない。内容の採点には `needs_review` の一致と必須語句が必要なため、既に答えていた期限に必要なキーが付くだけでも、内容正解数は増える。
+
+今回、重みのメモリは約 75% 減った。一方、生成・評価時間は増え、根拠なしの質問に「はい」「なし」と断定する例や、`needs_review` を文字列の `"false"` にする失敗も残った。21 問での観察なので、「量子化すると必ず正確になる・賢くなる・速くなる」とは結論づけない。
