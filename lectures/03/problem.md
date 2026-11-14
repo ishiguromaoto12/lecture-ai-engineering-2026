@@ -110,11 +110,11 @@ git push -u origin lec03
 
 基礎・実装・発展の3つのレベルから1つを選んで取り組みます。どれか1つに取り組めば完了です。
 
-| レベル | 内容 |
-|---|---|
-| 基礎 | 演習で見た `app/agent.py` の `INSTRUCTIONS` や、`app/tools.py` のツールの docstring を書き換えます。同じ質問を `--trace` 付きで実行し、ツールの呼ばれ方や回答がどう変わるかを比べて記録します |
-| 実装 | 学習の記録を `learning_log/` フォルダに保存するツール `save_learning_log` を作ります。保存は取り消しにくい操作なので、保存の前に利用者の確認を挟みます（Pydantic AI の `requires_approval=True`） |
-| 発展 | 次のどちらかに取り組みます。(a) 演習のエージェントと同じ指示とツールを使い、エージェントを組み立てる部分だけを Google の ADK で書き直し、`adk run` で動かして、書き方や回答を比べます。(b) コーディングエージェントの Pi を Codespaces で動かし、公開されている Pi のシステムプロンプトと、自分のエージェントの `INSTRUCTIONS` を比べます |
+| レベル | 内容                                                                                                                                                                                                                                                                                                                                          |
+| ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 基礎   | 演習で見た `app/agent.py` の `INSTRUCTIONS` や、`app/tools.py` のツールの docstring を書き換えます。同じ質問を `--trace` 付きで実行し、ツールの呼ばれ方や回答がどう変わるかを比べて記録します                                                                                                                                         |
+| 実装   | 学習の記録を `learning_log/` フォルダに保存するツール `save_learning_log` を作ります。保存は取り消しにくい操作なので、保存の前に利用者の確認を挟みます（Pydantic AI の `requires_approval=True`）                                                                                                                                       |
+| 発展   | 次のどちらかに取り組みます。(a) 演習のエージェントと同じ指示とツールを使い、エージェントを組み立てる部分だけを Google の ADK で書き直し、`adk run` で動かして、書き方や回答を比べます。(b) コーディングエージェントの Pi を Codespaces で動かし、公開されている Pi のシステムプロンプトと、自分のエージェントの `INSTRUCTIONS` を比べます |
 
 提出は、演習と同じ `lectures/03/answer.md` の「宿題」欄に書きます。
 
@@ -142,7 +142,6 @@ git push -u origin lec03
    agent = Agent(instructions=INSTRUCTIONS,
                  output_type=[str, DeferredToolRequests])
    ```
-
 3. CLI では、`result.output.approvals` の呼び出しごとに、保存してよいかを利用者に聞きます。その結果（`DeferredToolResults`）と、それまでの会話（`message_history=result.all_messages()`）を渡して、もう一度 `run_sync` を実行します
 
 詳しくは、Pydantic AI の公式ドキュメント「Deferred Tools」の Human-in-the-Loop Tool Approval を参考にしてください：https://pydantic.dev/docs/ai/tools-toolsets/deferred-tools/
@@ -151,12 +150,12 @@ git push -u origin lec03
 
 演習のエージェントと同じ指示とツールを使い、エージェントを組み立てる部分だけを ADK で書き直します。
 
-| 範囲 | 内容 |
-|---|---|
-| そのまま使う | `app/agent.py` の `INSTRUCTIONS` と、`app/tools.py` の `search_glossary`・`get_lecture_summary`（演習で `make_quiz` を作った人は `make_quiz` も） |
-| 新しく書く | `adk_agent/glossary_agent/` フォルダに `agent.py`（下のコード）と `__init__.py`（中身は `from . import agent` の1行）を作ります |
-| 作らなくてよい | `--trace` などのコマンドの機能、テスト、承認付きのツール。`app/` のファイルは変えません |
-| 比べること | 書き方（指示とツールの渡し方）と、演習と同じ質問への回答の違い |
+| 範囲           | 内容                                                                                                                                                            |
+| -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| そのまま使う   | `app/agent.py` の `INSTRUCTIONS` と、`app/tools.py` の `search_glossary`・`get_lecture_summary`（演習で `make_quiz` を作った人は `make_quiz` も） |
+| 新しく書く     | `adk_agent/glossary_agent/` フォルダに `agent.py`（下のコード）と `__init__.py`（中身は `from . import agent` の1行）を作ります                         |
+| 作らなくてよい | `--trace` などのコマンドの機能、テスト、承認付きのツール。`app/` のファイルは変えません                                                                     |
+| 比べること     | 書き方（指示とツールの渡し方）と、演習と同じ質問への回答の違い                                                                                                  |
 
 `adk_agent/glossary_agent/agent.py` の形：
 
@@ -200,7 +199,6 @@ Pi は、ファイルの書き換えやコマンドの実行を、確認を求�
    ```bash
    npm install -g --ignore-scripts @earendil-works/pi-coding-agent
    ```
-
 2. **起動する**：ターミナルで `pi` と入力します
 3. **モデルを設定する**：Pi の中で `/model` と入力し、Gemini のモデルを選びます。API キーは、Codespaces secret の `GEMINI_API_KEY` がそのまま使われます
 4. **比べる**：Pi のシステムプロンプトは、公開リポジトリ https://github.com/earendil-works/pi の `packages/coding-agent/src/core/system-prompt.ts` にあります。自分の `INSTRUCTIONS` と比べ、何が書かれていて、何が書かれていないかを見てみましょう
