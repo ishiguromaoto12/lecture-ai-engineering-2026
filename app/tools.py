@@ -5,8 +5,11 @@
 """
 
 import json
+from datetime import datetime
 from functools import cache
 from pathlib import Path
+import random
+from uuid import uuid4
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 MAX_RESULTS = 3
@@ -32,7 +35,7 @@ def search_glossary(query: str) -> str:
     """講座の用語集から用語を検索し、定義と、どの回で扱うかを返す。
 
     AIエンジニアリングの用語や、この講座（AIE2026）に固有の言葉について
-    答える前に使うこと。query には調べたい用語を1つだけ入れる（例: "LoRA"）。
+    答える前に使うこと。複数の用語を比較するときは、query にまとめて入れる（例: "LoRA QLoRA"）。
     """
     q = _normalize(query)
     if not q:
@@ -42,11 +45,13 @@ def search_glossary(query: str) -> str:
     exact = [e for e in glossary if q in _names(e)]
     # 「r」のような短い別名が何にでも当たらないよう、名前側が短いものは除く
     partial = [
-        e for e in glossary
+        e
+        for e in glossary
         if e not in exact and any(q in n or (len(n) >= 3 and n in q) for n in _names(e))
     ]
     in_definition = [
-        e for e in glossary
+        e
+        for e in glossary
         if e not in exact and e not in partial and q in _normalize(e["definition"])
     ]
     hits = (exact + partial + in_definition)[:MAX_RESULTS]
@@ -77,3 +82,48 @@ def get_lecture_summary(lecture: int) -> str:
         available = sorted(p.stem for p in (DATA_DIR / "lectures").glob("*.md"))
         return f"第{lecture}回の要点はまだありません。用意されている回: {', '.join(available)}"
     return path.read_text(encoding="utf-8")
+
+
+def make_quiz(lecture: int) -> str:
+    """指定した回の用語集から確認問題を1問作り、問題と答えを返す。
+
+    「第2回の確認問題を出して」のように、復習のための問題を
+    求められたときに使う。lectureには対象の回を整数で指定する。
+    """
+    terms = [entry for entry in load_glossary() if entry["lecture"] == lecture]
+
+    if not terms:
+        return f"第{lecture}回の用語は見つかりませんでした。"
+
+    entry = random.choice(terms)
+
+    return json.dumps(
+        {
+            "question": f"「{entry['term']}」の意味は？",
+            "answer": entry["definition"],
+        },
+        ensure_ascii=False,
+    )
+
+
+def save_learning_log(topic: str, note: str) -> str:
+    """学習したテーマと内容をファイルに保存する。
+
+    利用者が学習内容の記録や保存を求めたときに使う。
+    topicにはテーマ、noteには記録する内容を入れる。
+    """
+    log_dir = DATA_DIR.parent / "learning_log"
+    log_dir.mkdir(exist_ok=True)
+
+    record = {
+        "topic": topic,
+        "note": note,
+        "saved_at": datetime.now().astimezone().isoformat(),
+    }
+
+    path = log_dir / f"{uuid4().hex}.json"
+
+    with path.open("x", encoding="utf-8") as f:
+        json.dump(record, f, ensure_ascii=False, indent=2)
+
+    return f"学習記録を保存しました：{path.name}"
