@@ -6,7 +6,7 @@
     uv run python -m app.judge --compare lectures/04/reference/labels_instructor.jsonl
                                                 # 2 つのラベルファイルの一致率を出す（API キー不要）
     uv run python -m app.judge --generate --cases data/eval/my_cases.jsonl
-                                                # 宿題（実装）: 回答を自分のエージェント（app.agent）で生成し直す
+                                                # 宿題（実装）: 未回答を生成。1件ごとに保存し、再実行で途中再開
 
 採点の基準は data/eval/rubric.md に書いてある。基準ごとに理由を先に書かせてから、
 pass / fail / unsure のどれかを返させる（構造化出力）。unsure は自動判定から外し、人が見る「要確認」に回す。
@@ -301,18 +301,36 @@ def compare_labels(a: dict[str, dict], b: dict[str, dict], name_a: str, name_b: 
 
 
 # ---------------------------------------------------------------- 回答の生成（宿題・実装）
-def generate_answers(cases: list[dict], wait: float = 1.0) -> list[dict]:
-    """評価セットの各質問を自分のエージェント（app.agent）に投げ、回答を埋める。"""
+def generate_answers(
+    cases: list[dict],
+    wait: float = 15.0,
+    *,
+    checkpoint: Path | None = None,
+    regenerate: bool = False,
+) -> list[dict]:
+    """未回答を生成し、checkpointがあれば1件ごとに保存する。"""
     from app.agent import agent, build_model
 
+    pending = [case for case in cases if regenerate or not case.get("answer", "").strip()]
+    if not pending:
+        print(f"{len(cases)} 件すべて回答済みです。作り直す場合は --regenerate を付けてください。")
+        return cases
+
     model = build_model()
-    print(f"回答を生成中 {len(cases)} 件 ", end="", flush=True)
-    for case in cases:
+    print(f"回答を生成中 {len(pending)} 件（全 {len(cases)} 件、質問の間隔 {wait:g} 秒）", flush=True)
+    for index, case in enumerate(pending):
+        if index:
+            time.sleep(wait)
         result = agent.run_sync(case["question"], model=model)
-        case["answer"] = str(result.output)
-        print(".", end="", flush=True)
-        time.sleep(wait)
-    print()
+        if not isinstance(result.output, str):
+            raise UnexpectedModelBehavior(
+                f"#{case['id']} は最終回答ではなく承認待ちになりました。回答としては保存していません。"
+            )
+        case["answer"] = result.output
+        if checkpoint is not None:
+            write_jsonl(checkpoint, cases)
+        completed = sum(bool(c.get("answer", "").strip()) for c in cases)
+        print(f"  #{case['id']} 完了（回答あり {completed}/{len(cases)} 件）", flush=True)
     return cases
 
 
@@ -328,10 +346,16 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument("--rubric", type=Path, default=DEFAULT_RUBRIC, help="採点の基準（markdown）")
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT, help="採点結果の保存先（json）")
     parser.add_argument("--model", default=None, help="採点に使うモデル。既定は AIE_MODEL。'test' で API を呼ばない偽モデル")
-    parser.add_argument("--wait", type=float, default=0.0, help="1 件ごとに待つ秒数（レート制限にかかるとき）")
+    parser.add_argument("--wait", type=float, default=None, help="質問の間隔（秒）。既定は回答生成時15秒、採点時0秒")
     parser.add_argument("--compare", type=Path, help="LLM を呼ばず、このラベルファイルと --labels の一致率を出す")
-    parser.add_argument("--generate", action="store_true", help="評価セットの回答を自分のエージェントで生成し直す（--cases に上書き）")
+    parser.add_argument("--generate", action="store_true", help="自分のエージェントで未回答を生成し、--cases に1件ごとに保存（再実行で途中再開）")
+    parser.add_argument("--regenerate", action="store_true", help="--generate と併用し、回答済みの項目も作り直す")
     args = parser.parse_args(argv)
+    if args.wait is not None and args.wait < 0:
+        parser.error("--wait は0以上にしてください")
+    if args.regenerate and not args.generate:
+        parser.error("--regenerate は --generate と一緒に指定してください")
+    wait = args.wait if args.wait is not None else (15.0 if args.generate else 0.0)
 
     if args.compare:
         mine = load_labels(args.labels)
@@ -343,10 +367,19 @@ def main(argv: list[str] | None = None) -> None:
 
     if args.generate:
         try:
-            cases = generate_answers(cases)
+            cases = generate_answers(cases, wait=wait, checkpoint=args.cases, regenerate=args.regenerate)
         except ModelHTTPError as e:
             print(api_error_message(e.status_code, str(e.body)[:200]))
+            completed = sum(bool(c.get("answer", "").strip()) for c in cases)
+            print(f"回答済み {completed}/{len(cases)} 件は保存されています。再実行すると未回答から再開します。")
             raise SystemExit(1)
+        except UnexpectedModelBehavior as e:
+            print(str(e))
+            print("それまでの回答は保存されています。承認待ちの内容は、最終回答と区別して確認してください。")
+            raise SystemExit(1)
+        except KeyboardInterrupt:
+            print("\n中断しました。それまでの回答は保存されています。再実行すると未回答から再開します。")
+            raise SystemExit(130)
         write_jsonl(args.cases, cases)
         print(f"→ {args.cases} に回答を書き込みました。次に tools/annotate.py でラベルを付けてください")
         return
@@ -366,7 +399,7 @@ def main(argv: list[str] | None = None) -> None:
 
     judge = build_judge(model, rubric)
     try:
-        verdicts = judge_cases(judge, cases, wait=args.wait)
+        verdicts = judge_cases(judge, cases, wait=wait)
     except ModelHTTPError as e:
         print("\n" + api_error_message(e.status_code, str(e.body)[:200]))
         raise SystemExit(1)
