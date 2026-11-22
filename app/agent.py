@@ -16,7 +16,7 @@ import inspect
 import json
 from pathlib import Path
 
-from pydantic_ai import Agent
+from pydantic_ai import Agent, DeferredToolRequests, DeferredToolResults
 from pydantic_ai.exceptions import ModelHTTPError
 from fastmcp import Client
 from pydantic_ai.mcp import MCPToolset, StdioTransport
@@ -38,11 +38,15 @@ INSTRUCTIONS = """\
 """
 
 # モデルは実行時に渡す（テストではAPIを呼ばない TestModel に差し替えるため）
-agent = Agent(instructions=INSTRUCTIONS)
+agent = Agent(instructions=INSTRUCTIONS, output_type=[str, DeferredToolRequests])
 agent.tool_plain(tools.search_glossary)
 agent.tool_plain(tools.get_lecture_summary)
 
 # TODO(第3回 演習): tools.py に make_quiz を作り、ここで登録しよう
+agent.tool_plain(tools.make_quiz)
+
+# 第3回 宿題（実装）: 保存は利用者の承認を得てから実行する
+agent.tool_plain(tools.save_learning_log, requires_approval=True)
 
 # 第5回: 使う MCP サーバーの設定ファイル。Claude Desktop や Cursor と同じ "mcpServers" 形式
 MCP_CONFIG = Path(__file__).resolve().parent / "mcp_servers.json"
@@ -66,7 +70,9 @@ def load_mcp_servers(config_path: Path = MCP_CONFIG) -> list[MCPToolset]:
         if "url" in spec:
             transport = spec["url"]
         else:
-            transport = StdioTransport(spec["command"], spec.get("args", []), env=spec.get("env"))
+            transport = StdioTransport(
+                spec["command"], spec.get("args", []), env=spec.get("env")
+            )
         toolsets.append(MCPToolset(Client(transport, mode="legacy")).prefixed(name))
     return toolsets
 
@@ -109,12 +115,39 @@ def print_trace(result) -> None:
     print(f"[usage] {result.usage}")
 
 
+def ask_tool_approvals(requests: DeferredToolRequests) -> DeferredToolResults:
+    """実行する内容を表示し、ツール呼び出しごとに利用者の承認を受け取る。"""
+    decisions = DeferredToolResults()
+    for call in requests.approvals:
+        print(f"\n承認待ちのツール：{call.tool_name}")
+        if call.tool_name == "save_learning_log":
+            print("保存先：learning_log/")
+        print("実行する内容：")
+        print(json.dumps(call.args_as_dict(), ensure_ascii=False, indent=2))
+        try:
+            answer = input("この処理を実行しますか？ [y/N]: ")
+        except EOFError:
+            answer = ""
+        approved = answer.strip().casefold() in {"y", "yes"}
+        decisions.approvals[call.tool_call_id] = approved
+        print("承認しました。" if approved else "拒否しました。この処理は実行しません。")
+    return decisions
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="学習支援エージェントに質問する")
     parser.add_argument("question", nargs="?")
     parser.add_argument("--trace", action="store_true", help="ツール呼び出しを表示する")
-    parser.add_argument("--mcp", action="store_true", help="第5回: ツールを MCP サーバー（app/mcp_servers.json）から受け取る")
-    parser.add_argument("--list-tools", action="store_true", help="モデルに見えるツール一覧を表示して終了する（APIキー不要）")
+    parser.add_argument(
+        "--mcp",
+        action="store_true",
+        help="第5回: ツールを MCP サーバー（app/mcp_servers.json）から受け取る",
+    )
+    parser.add_argument(
+        "--list-tools",
+        action="store_true",
+        help="モデルに見えるツール一覧を表示して終了する（APIキー不要）",
+    )
     args = parser.parse_args()
 
     target = build_mcp_agent() if args.mcp else agent
@@ -128,10 +161,24 @@ def main() -> None:
     if args.mcp:
         print("[tools] MCP サーバー（app/mcp_servers.json）")
     try:
-        result = target.run_sync(args.question, model=build_model())
+        model = build_model()
+        result = target.run_sync(args.question, model=model)
+        while isinstance(result.output, DeferredToolRequests):
+            if result.output.calls:
+                raise SystemExit("外部での実行が必要なツールは、このCLIでは処理できません。")
+            decisions = ask_tool_approvals(result.output)
+            result = target.run_sync(
+                message_history=result.all_messages(),
+                deferred_tool_results=decisions,
+                model=model,
+                usage=result.usage,
+            )
     except ModelHTTPError as e:
         print(api_error_message(e.status_code, str(e.body)[:200]))
         raise SystemExit(1)
+    except KeyboardInterrupt:
+        print("\n処理を中断しました。")
+        raise SystemExit(130)
     print(result.output)
     if args.trace:
         print_trace(result)
