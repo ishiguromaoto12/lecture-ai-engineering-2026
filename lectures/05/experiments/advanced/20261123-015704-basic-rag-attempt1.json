@@ -1,0 +1,54 @@
+{
+  "mode": "basic-rag",
+  "question": "LoRAは何を固定し何を学習しますか？ QLoRAは何を加えますか？",
+  "model": "gemini-3.5-flash-lite",
+  "temperature": "未指定",
+  "output": "講義資料によると、LoRAとQLoRAの仕組みは以下のようになっています。\n\n* **LoRAは何を固定し、何を学習するか**\n  * **固定するもの：** 元の重み $W$（青色部分）は固定し、学習はしません（第2回・PDF p.52）。\n  * **学習するもの：** 小さな行列 $A$ と $B$（オレンジ色部分）だけを学習します。これは細長い2つの行列の積で変化分（低ランク）を表したものであり、本体はそのままにして薄い「付箋」を書き足すイメージです（第2回・PDF p.52）。\n\n* **QLoRAは何を加えるか**\n  * LoRAの手法に加えて、**元の重みを4bitに圧縮（数値を粗く保存）すること**を加えます（第2回・PDF p.51, p.52）。これにより、さらに少ないメモリで大きなモデルの調整が可能になります（第2回・PDF p.51, p.52）。",
+  "elapsed_seconds": 11.90135108307004,
+  "usage": {
+    "input_tokens": 1726,
+    "output_tokens": 250,
+    "requests": 2,
+    "tool_calls": 1,
+    "generation_cost_usd": "0.0011428"
+  },
+  "tool_calls": [
+    {
+      "name": "search_materials",
+      "arguments": {
+        "query": "LoRA QLoRA"
+      }
+    }
+  ],
+  "tool_returns": [
+    {
+      "name": "search_materials",
+      "content": {
+        "results": [
+          {
+            "page_id": "lec02-main-p052",
+            "document_id": "lec02-main",
+            "lecture": 2,
+            "document_title": "基盤モデルの仕組み",
+            "section": "選んだモデルを、いつ・どう直すか",
+            "title": "LoRA と QLoRA ：大きなモデルも GPU 1 台で調整できる",
+            "page": 52,
+            "content": "4/4 　選んだモデルを、いつ・どう直すか\nLoRA と QLoRA ：大きなモデルも GPU 1 台で調整できる\n元の重みは固定し、小さな「差分」だけを学習する（ LoRA ）。さらに元の重みを 4bit に圧縮する（ QLoRA ）\n出典： E. J. Hu et al. 「 LoRA 」（ ICLR 2022 ）／ T. Dettmers et al. 「 QLoRA 」（ NeurIPS 2023 ）。演習では transformers ・ peft ・ bitsandbytes ・ TRL を使用\nLoRA （ Hu et al. Fig.1 ）： A と B だけを学習する\n青：元の重み W\n固定して学習しない。 QLoRA では\n4bit （数値を粗く保存）にして\n約 1/4 。 7B なら約 4GB\n橙：小さな行列 A ・ B\nこれだけを学習。細長い 2 つの\n行列の積で、変化分を表す（低ランク）\nイメージ\n本体はそのままに、薄い「付箋」を\n書き足す。学習するのは全体の\n1% 未満にもできる\n650 億\nパラメータのモデルを\n48GB GPU 1 台\nで微調整（ QLoRA 論文）\n• Colab の GPU （例： 16GB ）でも、\n数十億パラメータ級なら調整できる。今日の\n演習はこれ\n• データの準備・評価・運用の手間は別にかかる\n© Matsuo-Iwasawa Lab, The University of Tokyo 52\n\n【図表・画像内の補足文字起こし】\nLoRA図：Pretrained Weights W ∈ R^(d×d)、x、h、A ~ N(0, σ²)、B = 0、d、r。",
+            "distance": 0.25997456908226013
+          },
+          {
+            "page_id": "lec02-main-p051",
+            "document_id": "lec02-main",
+            "lecture": 2,
+            "document_title": "基盤モデルの仕組み",
+            "section": "選んだモデルを、いつ・どう直すか",
+            "title": "PEFT ：モデル全体ではなく、一部だけを学習する",
+            "page": 51,
+            "content": "4/4 　選んだモデルを、いつ・どう直すか\nPEFT ：モデル全体ではなく、一部だけを学習する\n全パラメータを更新する FT は重い。少数のパラメータだけを学習する方法（ PEFT ）が主流になった\n出典：各手法の原論文（ Houlsby+ 2019 ／ Li & Liang 2021 ／ Lester+ 2021 ／ Hu+ 2022 ）。 Hugging Face PEFT ライブラリで利用可能\nどこを学習するか（ Dettmers et al. Fig.1 ）\nFull Fine-Tuning\n全パラメータを更新。メモリも保存容量も大きい\nLoRA\n本体は固定し、小さな追加部分だけ更新\nQLoRA\nさらに本体を 4bit に圧縮して省メモリ\nPEFT の主な方法\nアダプタ\n層の間に小さな層を差し込み、そこだけ学習\nHoulsby et al. 2019\nプレフィックス／プロンプトチューニング\n入力の前に学習できる「仮想トークン」を付ける\nLi & Liang 2021 ／ Lester et al. 2021\nLoRA\n重みの変化を、細長い 2 つの小さな行列の積（低ランク）で表して学習\nHu et al. 2022 　← 現在最も広く使われる\nQLoRA\nLoRA ＋元の重みを 4bit に圧縮。さらに少ないメモリで\nDettmers et al. 2023 　← 次のスライド\n© Matsuo-Iwasawa Lab, The University of Tokyo 51\n\n【図表・画像内の補足文字起こし】\n比較図：Full Finetuning (No Adapters)／LoRA／QLoRA。Optimizer、Adapters、16-bit Transformer、4-bit Transformer。",
+            "distance": 0.2853201925754547
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -115,6 +115,20 @@ macOSで `sqlite3.Connection` に `enable_load_extension` がないというエ�
 uv sync --frozen --python /opt/homebrew/bin/python3.13
 ```
 
+### 第5回の発展用比較
+
+第5回の発展用に、同じ質問で比較できる次の実行モードも用意しています。
+
+```bash
+uv run python -m app.agent --basic-rag --trace "LoRAは何を固定し何を学習しますか？ QLoRAは何を加えますか？"
+uv run python -m app.agent --tree --trace "LoRAは何を固定し何を学習しますか？ QLoRAは何を加えますか？"
+uv run python -m app.agent --tree-topics --trace "LoRAは何を固定し何を学習しますか？ QLoRAは何を加えますか？"
+```
+
+`--basic-rag` は前後ページの追加や用語集の併用をせず、ベクトル検索のヒットだけを使います。既定の通常起動は、実装課題で追加した前後ページ付きの検索のままです。
+
+`--tree` は元の目次、`--tree-topics` は講義・章の候補に「主な用語」を付けた目次です。用語は `graph.json` の `mentions` の関係から、配下の何ページで言及されるかを集計し、上位12語を返します。重複する関係は1ページにつき1回と数え、同数なら用語ID順にします。対象は第1〜3回に限定し、候補のページ本文や検索DBは変更しません。2つのTreeモードでは指示文・ツール名・引数をそろえ、目次の候補に付ける情報だけを変えます。traceにも候補の主な用語を表示します。
+
 ## 構成
 
 ```

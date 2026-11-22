@@ -3,8 +3,10 @@
 使い方:
     uv run python -m app.agent "LoRAとQLoRAの違いは？"
     uv run python -m app.agent --trace "LoRAとQLoRAの違いは？"   # ツール呼び出しを表示
+    uv run python -m app.agent --basic-rag --trace "LoRAとQLoRAの違いは？"  # 前後ページを付けない基本RAG
     uv run python -m app.agent --graph --trace "LoRAとQLoRAの違いは？"  # 検索からグラフをたどって回答
     uv run python -m app.agent --tree --trace "LoRAとQLoRAの違いは？"  # 目次をたどって回答
+    uv run python -m app.agent --tree-topics --trace "LoRAとQLoRAの違いは？"  # 用語の手がかり付き目次
     uv run python -m app.agent --full-context --trace "LoRAとQLoRAの違いは？"  # 全資料を一度に渡す
     uv run python -m app.agent --mcp --trace "LoRAとは？"        # 第5回: ツールを MCP サーバーから受け取る
     uv run python -m app.agent --mcp --list-tools               # 第5回: モデルに見えるツール一覧（APIキー不要）
@@ -21,7 +23,7 @@ from pathlib import Path
 from contextlib import nullcontext
 from time import perf_counter
 
-from pydantic_ai import Agent, DeferredToolRequests, DeferredToolResults
+from pydantic_ai import Agent, DeferredToolRequests, DeferredToolResults, Tool
 from pydantic_ai.exceptions import ModelHTTPError
 from fastmcp import Client
 from pydantic_ai.mcp import MCPToolset, StdioTransport
@@ -88,6 +90,18 @@ agent.tool_plain(tools.make_quiz)
 
 # 第3回 宿題（実装）: 保存は利用者の承認を得てから実行する
 agent.tool_plain(tools.save_learning_log, requires_approval=True)
+
+# 比較時はツール名・説明・引数を変えず、取得する情報だけを切り替える。
+BASIC_RAG_TOOL = Tool(
+    tools.search_materials_basic,
+    name="search_materials",
+    description=inspect.cleandoc(tools.search_materials.__doc__ or ""),
+)
+TREE_TOPICS_TOOL = Tool(
+    tools.browse_tree_with_topics,
+    name="browse_tree",
+    description=inspect.cleandoc(tools.browse_tree.__doc__ or ""),
+)
 
 # 第5回: 使う MCP サーバーの設定ファイル。Claude Desktop や Cursor と同じ "mcpServers" 形式
 MCP_CONFIG = Path(__file__).resolve().parent / "mcp_servers.json"
@@ -167,6 +181,8 @@ def print_trace(result, elapsed_seconds: float | None = None) -> None:
                             paths[child["id"]] = path + [child["title"]]
                             page = f"PDF p.{child['page']} · " if "page" in child else ""
                             print(f"    - {child['id']} · {page}{child['title']}")
+                            if "topics" in child:
+                                print(f"      主な用語: {', '.join(child['topics']) or '登録なし'}")
                             if "content" in child:
                                 print(f"      {child['content']}")
                         if not data["children"]:
@@ -205,17 +221,22 @@ def main() -> None:
     parser.add_argument("question", nargs="?")
     parser.add_argument("--trace", action="store_true", help="ツール呼び出しを表示する")
     modes = parser.add_mutually_exclusive_group()
+    modes.add_argument("--basic-rag", action="store_true", help="前後ページを追加せず、講義資料のベクトル検索だけで答える")
     modes.add_argument("--mcp", action="store_true", help="第5回: ツールを MCP サーバー（app/mcp_servers.json）から受け取る")
     modes.add_argument("--graph", action="store_true", help="検索結果からグラフをたどり、候補ページを読んで答える")
     modes.add_argument("--tree", action="store_true", help="目次をたどり、必要なページを読んで答える")
+    modes.add_argument("--tree-topics", action="store_true", help="講義・章の候補に主な用語を付けた目次をたどる")
     modes.add_argument("--full-context", action="store_true", help="検索せず、lectures.jsonの全資料を一度に渡す")
     parser.add_argument("--list-tools", action="store_true", help="モデルに見えるツール一覧を表示して終了する（APIキー不要）")
     args = parser.parse_args()
 
     target = build_mcp_agent() if args.mcp else agent
     mode = nullcontext()
-    if args.tree:
-        mode = target.override(instructions=TREE_INSTRUCTIONS, tools=[tools.browse_tree])
+    if args.basic_rag:
+        mode = target.override(instructions=INSTRUCTIONS, tools=[BASIC_RAG_TOOL])
+    elif args.tree or args.tree_topics:
+        tree_tool = TREE_TOPICS_TOOL if args.tree_topics else tools.browse_tree
+        mode = target.override(instructions=TREE_INSTRUCTIONS, tools=[tree_tool])
     elif args.graph:
         mode = target.override(instructions=GRAPH_INSTRUCTIONS, tools=[tools.search_graph])
     with mode:
