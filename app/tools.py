@@ -135,12 +135,22 @@ def search_materials(query: str) -> str:
 
     queryに調べたい内容を指定する。
     """
+    return _search_materials(query, include_neighbors=True)
+
+
+def search_materials_basic(query: str) -> str:
+    """比較用に、ベクトル検索でヒットした本文だけを返す。"""
+    return _search_materials(query, include_neighbors=False)
+
+
+def _search_materials(query: str, *, include_neighbors: bool) -> str:
     from google.genai.errors import APIError
     import sqlite3
-    from app.retrieval import search
+    from app.retrieval import search, search_with_neighbors
 
     try:
-        return json.dumps({"results": search(query)}, ensure_ascii=False)
+        results = search_with_neighbors(query) if include_neighbors else search(query)
+        return json.dumps({"results": results}, ensure_ascii=False)
     except (ValueError, FileNotFoundError, sqlite3.Error) as e:
         return json.dumps({"error": str(e), "results": []}, ensure_ascii=False)
     except APIError as e:
@@ -152,10 +162,19 @@ def browse_tree(node_id: str | None = None) -> str:
 
     最初はnode_idを省略する。続いて返されたIDを指定して目次をたどる。
     """
+    return _browse_tree(node_id, include_topics=False)
+
+
+def browse_tree_with_topics(node_id: str | None = None) -> str:
+    """比較用に、講義・章の候補へ主な用語を付けた目次を返す。"""
+    return _browse_tree(node_id, include_topics=True)
+
+
+def _browse_tree(node_id: str | None, *, include_topics: bool) -> str:
     from app.retrieval import browse_tree as browse
 
     try:
-        return json.dumps(browse(node_id), ensure_ascii=False)
+        return json.dumps(browse(node_id, include_topics=include_topics), ensure_ascii=False)
     except (ValueError, OSError) as e:
         return json.dumps({"error": str(e)}, ensure_ascii=False)
 

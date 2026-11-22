@@ -6,7 +6,7 @@ import math
 import re
 import sqlite3
 from contextlib import contextmanager
-from collections import defaultdict, deque
+from collections import Counter, defaultdict, deque
 from pathlib import Path
 
 from google import genai
@@ -49,12 +49,40 @@ def load_pages(source: Path = RAG_SOURCE) -> list[dict]:
     return pages
 
 
-def browse_tree(node_id: str | None = None) -> dict:
+def _tree_topic_hints(tree: dict, page_ids: set[str], limit: int = 12) -> dict[str, list[str]]:
+    """各枝の配下ページで言及される用語を、登場ページ数順にまとめる。"""
+    graph = json.loads(RAG_GRAPH.read_text(encoding="utf-8"))
+    terms = {node["id"]: node["title"] for node in graph["nodes"] if node["kind"] == "term"}
+    mentions = defaultdict(set)
+    for edge in graph["edges"]:
+        if edge["relation"] == "mentions" and edge["source"] in page_ids and edge["target"] in terms:
+            mentions[edge["source"]].add(edge["target"])
+
+    hints = {}
+
+    def collect(node):
+        counts = Counter()
+        if node["kind"] == "page":
+            if node["id"] in page_ids:
+                counts.update(mentions[node["id"]])
+        else:
+            for child in node.get("children", []):
+                counts.update(collect(child))
+            ranked = sorted(counts, key=lambda term_id: (-counts[term_id], term_id))
+            hints[node["id"]] = [terms[term_id] for term_id in ranked[:limit]]
+        return counts
+
+    collect(tree)
+    return hints
+
+
+def browse_tree(node_id: str | None = None, *, include_topics: bool = False) -> dict:
     """直下のページは先頭文、指定したページ自身は全文を返す。"""
     tree = json.loads(RAG_TREE.read_text(encoding="utf-8"))
     tree["children"] = [node for node in tree["children"] if node["id"] in RAG_DOCUMENT_IDS]
     node_id = node_id or tree["id"]
     pages = {page["page_id"]: page for page in load_pages(RAG_SOURCE)}
+    topic_hints = _tree_topic_hints(tree, set(pages)) if include_topics else {}
 
     def describe(node, full=False):
         info = {key: node[key] for key in ("id", "kind", "title")}
@@ -62,6 +90,9 @@ def browse_tree(node_id: str | None = None) -> dict:
             info.update({key: value for key, value in pages[node["id"]].items() if key != "page_id"})
             if not full:
                 info["content"] = re.split(r"(?<=[。！？])|\n", info["content"].strip(), maxsplit=1)[0]
+        elif include_topics and not full:
+            # 本文を先読みせず、選択候補にだけ用語の手がかりを付ける。
+            info["topics"] = topic_hints.get(node["id"], [])
         return info
 
     remaining = [tree]
@@ -138,6 +169,26 @@ def search(query: str) -> list[dict]:
         return [dict(row) for row in rows]
 
 
+def search_with_neighbors(query: str) -> list[dict]:
+    """検索結果を保持し、同じ資料の前後1ページの本文を重複なく追加する。"""
+    hits = search(query)
+    if not hits:
+        return []
+
+    pages = {(page["document_id"], page["page"]): page for page in load_pages(RAG_SOURCE)}
+    results = [dict(hit) for hit in hits]
+    seen = {hit["page_id"] for hit in hits}
+    for hit in hits:
+        for offset in (-1, 1):
+            neighbor = pages.get((hit["document_id"], hit["page"] + offset))
+            if neighbor is None or neighbor["page_id"] in seen:
+                continue
+            # 近傍ページに検索距離を流用せず、追加元のページIDを残す。
+            results.append({**neighbor, "neighbor_of": hit["page_id"]})
+            seen.add(neighbor["page_id"])
+    return results
+
+
 def search_graph(query: str) -> dict:
     """ベクトル検索を入口に、前後ページと共通用語で候補を広げる。"""
     pages = {page["page_id"]: page for page in load_pages(RAG_SOURCE)}
@@ -201,9 +252,14 @@ def run_full_context(agent, question: str, model, instructions: str, prompt_temp
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="エージェントを使わず、講義資料の検索だけを実行する")
     parser.add_argument("query", help="調べたい内容")
+    parser.add_argument("--neighbors", action="store_true", help="検索で見つけたページに、同じ資料の前後1ページも追加する")
     args = parser.parse_args()
-    for i, result in enumerate(search(args.query), 1):
+    results = search_with_neighbors(args.query) if args.neighbors else search(args.query)
+    for i, result in enumerate(results, 1):
         print(f"\n{'=' * 60}\n検索結果 {i}\n{'=' * 60}")
+        if args.neighbors:
+            origin = result.get("neighbor_of")
+            print(f"取得方法: {origin} の前後ページ" if origin else "取得方法: ベクトル検索でヒット")
         print(f"講義: {result['document_title']}")
         print(f"章: {result['section']}")
         print(f"タイトル: {result['title']}")
