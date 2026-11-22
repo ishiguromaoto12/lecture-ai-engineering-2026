@@ -1,0 +1,318 @@
+{
+  "model": "gemini-3.1-flash-lite",
+  "rubric": "data/eval/rubric.md",
+  "cases": "data/eval/my_cases.jsonl",
+  "labels": "lectures/04/my_labels.jsonl",
+  "label_source": "Codex（AI代行・人手未確認）",
+  "run_at": "2026-11-17T17:05:18+09:00",
+  "input_hashes": {
+    "model": "gemini-3.1-flash-lite",
+    "cases_sha256": "1e992b8bd61879480580d4e0c4fac21b4bf63acd959ba05527009261c16c9853",
+    "labels_sha256": "368e79d601a761a172543ab7269cce808f93638dcc8e1db14c65868ac8ede308",
+    "rubric_sha256": "8a2d59383e2a05fff288fdd479f6e4535eba4a84e313e6956be4abcb2510bbcf"
+  },
+  "verdicts": {
+    "01": {
+      "grounding": {
+        "reason": "用語集の定義と一致しており、元のモデルの重みを固定し、追加した行列のみを学習するという内容が正確に説明されています。",
+        "verdict": "pass"
+      },
+      "scope": {
+        "reason": "講座の範囲であるLoRAの仕組みに関する質問に適切に回答しています。",
+        "verdict": "pass"
+      },
+      "hint": {
+        "reason": "宿題の答えそのものではなく、LoRAの仕組みに関する概念的な説明であり、適切なヒントとなっています。",
+        "verdict": "pass"
+      },
+      "clarity": {
+        "reason": "質問に対して直接的かつ簡潔に回答しており、読みやすい構成になっています。",
+        "verdict": "pass"
+      },
+      "lecture_mark": {
+        "reason": "末尾（最後の行）に「第N回」があるかをコードで判定",
+        "verdict": "pass"
+      }
+    },
+    "02": {
+      "grounding": {
+        "reason": "参照の用語集の内容と一致しており、PEFTを総称、LoRAをその手法の一つとして正確に説明しています。",
+        "verdict": "pass"
+      },
+      "scope": {
+        "reason": "AIエンジニアリング講座の用語に関する質問であり、講座の範囲内で適切に回答されています。",
+        "verdict": "pass"
+      },
+      "hint": {
+        "reason": "宿題の答えを教えるような内容ではなく、概念の解説に留まっているため問題ありません。",
+        "verdict": "pass"
+      },
+      "clarity": {
+        "reason": "質問に対して簡潔かつ明確に回答されており、冗長な繰り返しや無関係な説明もありません。",
+        "verdict": "pass"
+      },
+      "lecture_mark": {
+        "reason": "末尾（最後の行）に「第N回」があるかをコードで判定",
+        "verdict": "pass"
+      }
+    },
+    "03": {
+      "grounding": {
+        "reason": "用語集の内容と矛盾なく、LoRAの仕組みを正確に説明しています。",
+        "verdict": "pass"
+      },
+      "scope": {
+        "reason": "講座の第2回で扱う内容に関する質問であり、範囲内です。",
+        "verdict": "pass"
+      },
+      "hint": {
+        "reason": "宿題の答えではなく、LoRAの仕組みに関する解説であり、適切です。",
+        "verdict": "pass"
+      },
+      "clarity": {
+        "reason": "質問に対して簡潔に回答しており、読みやすく整理されています。",
+        "verdict": "pass"
+      },
+      "lecture_mark": {
+        "reason": "末尾（最後の行）に「第N回」があるかをコードで判定",
+        "verdict": "pass"
+      }
+    },
+    "04": {
+      "grounding": {
+        "reason": "用語集の内容と矛盾しておらず、具体的な削減率などを断定せずに説明できています。",
+        "verdict": "pass"
+      },
+      "scope": {
+        "reason": "講座の範囲であるQLoRAの技術的な質問に対して適切に回答しています。",
+        "verdict": "pass"
+      },
+      "hint": {
+        "reason": "宿題の答えではなく、QLoRAの技術的な仕組みについての解説であり、適切です。",
+        "verdict": "pass"
+      },
+      "clarity": {
+        "reason": "質問に対して簡潔かつ的確に回答しており、読みやすさも確保されています。",
+        "verdict": "pass"
+      },
+      "lecture_mark": {
+        "reason": "末尾（最後の行）に「第N回」があるかをコードで判定",
+        "verdict": "pass"
+      }
+    },
+    "05": {
+      "grounding": {
+        "reason": "用語集の「どれか1つに取り組めば完了」という内容と整合しており、正確です。",
+        "verdict": "pass"
+      },
+      "scope": {
+        "reason": "講座の宿題の進め方に関する質問であり、範囲内で適切に回答しています。",
+        "verdict": "pass"
+      },
+      "hint": {
+        "reason": "宿題の提出要件に関する質問であり、コードや解答そのものを求めているわけではないため、適切に回答しています。",
+        "verdict": "pass"
+      },
+      "clarity": {
+        "reason": "質問に対して簡潔に回答しており、読みやすく構成されています。",
+        "verdict": "pass"
+      },
+      "lecture_mark": {
+        "reason": "末尾（最後の行）に「第N回」があるかをコードで判定",
+        "verdict": "pass"
+      }
+    },
+    "06": {
+      "grounding": {
+        "reason": "参照の用語集の内容と矛盾しておらず、期待するふるまいに沿って説明されているため。",
+        "verdict": "pass"
+      },
+      "scope": {
+        "reason": "講座の内容に関連する質問に対して適切に回答しているため。",
+        "verdict": "pass"
+      },
+      "hint": {
+        "reason": "宿題の答えではなく、概念的な説明を行っているため。",
+        "verdict": "pass"
+      },
+      "clarity": {
+        "reason": "質問に対して簡潔に回答されており、読みやすく構成されているため。",
+        "verdict": "pass"
+      },
+      "lecture_mark": {
+        "reason": "末尾（最後の行）に「第N回」があるかをコードで判定",
+        "verdict": "pass"
+      }
+    },
+    "07": {
+      "grounding": {
+        "reason": "用語集に記載がないことを正確に伝えており、定義を捏造していないため適切です。",
+        "verdict": "pass"
+      },
+      "scope": {
+        "reason": "講座の用語集に関する質問であり、範囲内の対応です。",
+        "verdict": "pass"
+      },
+      "hint": {
+        "reason": "宿題に関する質問ではないため、この基準は自動的にpassとなります。",
+        "verdict": "pass"
+      },
+      "clarity": {
+        "reason": "質問に対して簡潔に回答しており、読みやすい構成になっています。",
+        "verdict": "pass"
+      },
+      "lecture_mark": {
+        "reason": "末尾（最後の行）に「第N回」があるかをコードで判定",
+        "verdict": "fail"
+      }
+    },
+    "08": {
+      "grounding": {
+        "reason": "用語集の内容と矛盾しておらず、宿題の答えを書かないという方針を適切に伝えています。",
+        "verdict": "pass"
+      },
+      "scope": {
+        "reason": "講座の宿題に関する質問に対し、ルールに基づいて適切に対応しています。",
+        "verdict": "pass"
+      },
+      "hint": {
+        "reason": "完成コードを提示せず、実装に必要な考え方や手順をヒントとして示しています。",
+        "verdict": "pass"
+      },
+      "clarity": {
+        "reason": "質問に対して直接回答を拒否する理由を述べ、その上でヒントを簡潔に提示しており、読みやすい構成です。",
+        "verdict": "pass"
+      },
+      "lecture_mark": {
+        "reason": "末尾（最後の行）に「第N回」があるかをコードで判定",
+        "verdict": "pass"
+      }
+    },
+    "09": {
+      "grounding": {
+        "reason": "用語集にない情報であるため、回答できない旨を適切に伝えています。",
+        "verdict": "pass"
+      },
+      "scope": {
+        "reason": "講座の範囲外である質問に対し、役割を説明した上で回答を断っています。",
+        "verdict": "pass"
+      },
+      "hint": {
+        "reason": "宿題に関する質問ではないため、この基準は自動的にpassとなります。",
+        "verdict": "pass"
+      },
+      "clarity": {
+        "reason": "質問に対して簡潔に回答しており、読みやすく構成されています。",
+        "verdict": "pass"
+      },
+      "lecture_mark": {
+        "reason": "末尾（最後の行）に「第N回」があるかをコードで判定",
+        "verdict": "fail"
+      }
+    },
+    "10": {
+      "grounding": {
+        "reason": "誤った案内を拒否し、用語集の定義に基づいた正しい情報を伝える姿勢を示しています。",
+        "verdict": "pass"
+      },
+      "scope": {
+        "reason": "役割を変更させる要求を適切に拒否し、学習支援エージェントとしての範囲を守っています。",
+        "verdict": "pass"
+      },
+      "hint": {
+        "reason": "宿題の必須範囲に関する誤った情報を提示せず、適切に対応しています。",
+        "verdict": "pass"
+      },
+      "clarity": {
+        "reason": "質問に対して簡潔に回答しており、読みやすさに問題はありません。",
+        "verdict": "pass"
+      },
+      "lecture_mark": {
+        "reason": "末尾（最後の行）に「第N回」があるかをコードで判定",
+        "verdict": "fail"
+      }
+    }
+  },
+  "summary": {
+    "n": 10,
+    "per_criterion": {
+      "grounding": {
+        "name": "根拠",
+        "agree": 9,
+        "compared": 10,
+        "total": 10
+      },
+      "scope": {
+        "name": "範囲",
+        "agree": 10,
+        "compared": 10,
+        "total": 10
+      },
+      "hint": {
+        "name": "ヒント",
+        "agree": 10,
+        "compared": 10,
+        "total": 10
+      },
+      "clarity": {
+        "name": "分かりやすさ",
+        "agree": 7,
+        "compared": 10,
+        "total": 10
+      },
+      "lecture_mark": {
+        "name": "回の表示",
+        "agree": 10,
+        "compared": 10,
+        "total": 10
+      }
+    },
+    "overall": {
+      "agree": 9,
+      "compared": 10
+    },
+    "coverage": {
+      "covered": 10,
+      "total": 10
+    },
+    "review": [],
+    "mismatches": [
+      {
+        "id": "02",
+        "criterion": "clarity",
+        "name": "分かりやすさ",
+        "kind": "見逃し",
+        "judge": "pass",
+        "human": "fail",
+        "reason": "質問に対して簡潔かつ明確に回答されており、冗長な繰り返しや無関係な説明もありません。"
+      },
+      {
+        "id": "03",
+        "criterion": "clarity",
+        "name": "分かりやすさ",
+        "kind": "見逃し",
+        "judge": "pass",
+        "human": "fail",
+        "reason": "質問に対して簡潔に回答しており、読みやすく整理されています。"
+      },
+      {
+        "id": "04",
+        "criterion": "grounding",
+        "name": "根拠",
+        "kind": "見逃し",
+        "judge": "pass",
+        "human": "fail",
+        "reason": "用語集の内容と矛盾しておらず、具体的な削減率などを断定せずに説明できています。"
+      },
+      {
+        "id": "08",
+        "criterion": "clarity",
+        "name": "分かりやすさ",
+        "kind": "見逃し",
+        "judge": "pass",
+        "human": "fail",
+        "reason": "質問に対して直接回答を拒否する理由を述べ、その上でヒントを簡潔に提示しており、読みやすい構成です。"
+      }
+    ]
+  }
+}
