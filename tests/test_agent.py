@@ -15,14 +15,15 @@ from pydantic_ai.models.test import TestModel
 from app import tools
 from app.agent import agent, ask_tool_approvals
 
-BASE_TOOLS = {"search_glossary", "get_lecture_summary"}
+BASE_TOOLS = {"search_materials"}
 
 
 def _parts(result, kind):
     return [p for m in result.all_messages() for p in m.parts if isinstance(p, kind)]
 
 
-def test_base_tools_are_registered_and_called():
+def test_base_tools_are_registered_and_called(monkeypatch):
+    monkeypatch.setattr("app.retrieval.search", lambda *args, **kwargs: [])
     model = TestModel()
     with agent.override(model=model):
         result = agent.run_sync("LoRAとは？")
@@ -38,12 +39,15 @@ def test_base_tools_are_registered_and_called():
     assert result.output
 
 
-def test_glossary_result_reaches_the_model():
-    model = TestModel(call_tools=["search_glossary"])
+def test_material_result_reaches_the_model(monkeypatch):
+    hit = {"page_id": "lec02-main-p052", "lecture": 2, "page": 52, "content": "元の重みは固定"}
+    monkeypatch.setattr("app.retrieval.search", lambda *args, **kwargs: [hit])
+    model = TestModel(call_tools=["search_materials"])
     with agent.override(model=model):
         result = agent.run_sync("RAGとは？")
     returns = _parts(result, ToolReturnPart)
-    assert returns and returns[0].tool_name == "search_glossary"
+    assert returns and returns[0].tool_name == "search_materials"
+    assert json.loads(returns[0].content)["results"] == [hit]
 
 
 @pytest.mark.parametrize("answer,approved", [("y", True), ("n", False), ("", False), (None, False)])
@@ -84,3 +88,21 @@ def test_learning_log_is_saved_only_after_approval(tmp_path, monkeypatch, capsys
         assert record["topic"] == args["topic"]
         assert record["note"] == args["note"]
         assert record["saved_at"]
+
+
+@pytest.mark.parametrize("answer,expected_files", [("y", 1), ("n", 0)])
+def test_cli_preserves_approval_with_retrieval_modes(tmp_path, monkeypatch, capsys, answer, expected_files):
+    from app import agent as agent_module
+
+    monkeypatch.setattr(tools, "DATA_DIR", tmp_path / "data")
+    monkeypatch.setattr(agent_module, "build_model", lambda: TestModel(call_tools=["save_learning_log"]))
+    monkeypatch.setattr("sys.argv", ["app.agent", "--trace", "学習内容を保存してください"])
+    monkeypatch.setattr("builtins.input", lambda _: answer)
+
+    agent_module.main()
+
+    assert len(list((tmp_path / "learning_log").glob("*.json"))) == expected_files
+    output = capsys.readouterr().out
+    assert "承認待ちのツール：save_learning_log" in output
+    assert "[time]" in output
+    assert "[tool call]" in output
