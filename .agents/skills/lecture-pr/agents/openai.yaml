@@ -1,0 +1,4 @@
+interface:
+  display_name: "講座の課題PRを作成"
+  short_description: "講座の課題終了時に変更を確認し、コミット・push・PR作成まで進める"
+  default_prompt: "$lecture-pr を使い、今回の課題の変更を確認してコミット・pushし、自分のforkのmain宛てにPRを作成してください。マージはしないでください。"
